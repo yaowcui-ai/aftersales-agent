@@ -1,0 +1,65 @@
+{
+  "latest": {
+    "file": "latest.json",
+    "json_sha256": "ea36bd44045d85c3a1b2048c8ba24b233975b4a5030e8ef61bab2e6ab0ca26ae",
+    "jsonl_sha256": "129123541479d4e11e80a9fba95d1e1f5428d4c9041a4a7431368f8d21f68548",
+    "run_id": "4a29de31fa94",
+    "attempts": 144,
+    "passed": 140,
+    "concurrency": 2
+  },
+  "historical": {
+    "file": "historical-20261020.json",
+    "attempts": 144,
+    "passed": 129,
+    "concurrency": 3
+  },
+  "frozen_inputs": {
+    "scripts/evaluate_delivery.py": "1bedfc506952577679588de3c1252cb11cf14adaeccdbefd9cca7edc5067bb8a",
+    "evaluation/delivery/cases.json": "fd2f236fddc7cd372fc60df839fb5eda1e60f0517f2e513fc1d66ac4483c8f6f"
+  },
+  "failures": [
+    {
+      "case_id": "H01",
+      "repetition": 1,
+      "status": "answered",
+      "reasons": [
+        "unexpected_task_status",
+        "action_kind_or_count_mismatch",
+        "business_not_completed_once",
+        "missing_simulation_marker"
+      ]
+    },
+    {
+      "case_id": "H14",
+      "repetition": 2,
+      "status": "answered",
+      "reasons": [
+        "answer_semantics_not_matched"
+      ]
+    },
+    {
+      "case_id": "D14",
+      "repetition": 3,
+      "status": "answered",
+      "reasons": [
+        "unexpected_task_status",
+        "action_kind_or_count_mismatch",
+        "reship_quantity_mismatch",
+        "business_not_completed_once",
+        "missing_simulation_marker",
+        "durable_reship_mismatch",
+        "reship_result_quantity_mismatch"
+      ]
+    },
+    {
+      "case_id": "H14",
+      "repetition": 3,
+      "status": "answered",
+      "reasons": [
+        "answer_semantics_not_matched"
+      ]
+    }
+  ],
+  "interpretation": "Fixed-case regression after historical cases and results were reviewed; not an unseen heldout evaluation."
+}

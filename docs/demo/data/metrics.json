@@ -1,0 +1,37 @@
+{
+  "status": "complete",
+  "detail": "冻结48案例各3次，完整真实模型回归复测；140通过、4失败均公开。",
+  "updated_at": "2026-10-21",
+  "evaluation": {
+    "status": "complete",
+    "passed": 140,
+    "total": 144,
+    "rate": 97.2,
+    "cases": 48,
+    "repetitions": 3,
+    "concurrency": 2,
+    "report_url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/latest.json"
+  },
+  "tests": {
+    "passed": 80,
+    "detail": "离线应用测试通过，使用替身模型与隔离数据库"
+  },
+  "browser": {
+    "steps": 7,
+    "detail": "真实浏览器：新对话、追问、历史切换和刷新恢复"
+  },
+  "evidence": [
+    {
+      "label": "逐次 JSONL",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/latest.jsonl"
+    },
+    {
+      "label": "SHA256 与失败索引",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/manifest.json"
+    },
+    {
+      "label": "历史 129/144 原始结果",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/historical-20261020.json"
+    }
+  ]
+}

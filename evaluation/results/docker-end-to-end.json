@@ -1,0 +1,417 @@
+{
+  "base_url": "http://127.0.0.1:8190",
+  "real_model_and_http_mcp": true,
+  "cases": [
+    {
+      "thread_id": "deploy-b738109194-0",
+      "customer_id": "learner-001",
+      "status": "completed",
+      "messages": [
+        {
+          "type": "human",
+          "content": "请为订单 DEMO-001 申请物流异常工单，描述：模拟演示核实派送地址。",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "我会先查询该订单的物流情况，再提出物流异常申请。",
+          "tool_calls": [
+            {
+              "name": "get_shipments",
+              "args": {
+                "order_id": "DEMO-001"
+              },
+              "id": "call_00_z7GugrBiTZVvulgUDu8B8118",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"shipments\": [{\"shipment_id\": \"SHIP-001\", \"order_id\": \"DEMO-001\", \"carrier\": \"模拟快递\", \"tracking_number\": \"TRACK-001\", \"status\": \"in_transit\", \"description\": \"运输中\", \"updated_at\": \"2026-10-18T09:00:00+00:00\"}, {\"shipment_id\": \"SHIP-002\", \"order_id\": \"DEMO-001\", \"carrier\": \"模拟快递\", \"tracking_number\": \"TRACK-002\", \"status\": \"exception\", \"description\": \"派送异常，待核实地址\", \"updated_at\": \"2026-10-19T09:00:00+00:00\"}]}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "",
+          "tool_calls": [
+            {
+              "name": "prepare_action",
+              "args": {
+                "kind": "logistics",
+                "order_id": "DEMO-001",
+                "description": "模拟演示核实派送地址（涉及包裹 SHIP-002 / TRACK-002，状态：派送异常，待核实地址）"
+              },
+              "id": "call_00_sHQbRnKYPruJoHsPGCTN3321",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"proposal\": {\"action_id\": \"34d3c238-93c2-4a83-9e39-6fd7e2b983c4\", \"customer_id\": \"learner-001\", \"thread_id\": \"deploy-b738109194-0\", \"kind\": \"logistics\", \"order_id\": \"DEMO-001\", \"description\": \"模拟演示核实派送地址（涉及包裹 SHIP-002 / TRACK-002，状态：派送异常，待核实地址）\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-20T09:21:42.958328+00:00\", \"amount\": null}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "工单 dca218b9-9bf5-4954-bbae-585acb3b826f（订单 DEMO-001）为模拟物流业务，当前状态为 open，待处理，尚未解决。",
+          "tool_calls": []
+        }
+      ],
+      "proposal": {
+        "action_id": "34d3c238-93c2-4a83-9e39-6fd7e2b983c4",
+        "customer_id": "learner-001",
+        "thread_id": "deploy-b738109194-0",
+        "kind": "logistics",
+        "order_id": "DEMO-001",
+        "description": "模拟演示核实派送地址（涉及包裹 SHIP-002 / TRACK-002，状态：派送异常，待核实地址）",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "kind": "logistics",
+          "case_id": "dca218b9-9bf5-4954-bbae-585acb3b826f",
+          "order_id": "DEMO-001",
+          "simulated": true,
+          "case_status": "open"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-20T09:21:42.958328+00:00",
+        "amount": null
+      },
+      "final_answer": "工单 dca218b9-9bf5-4954-bbae-585acb3b826f（订单 DEMO-001）为模拟物流业务，当前状态为 open，待处理，尚未解决。",
+      "next_nodes": [],
+      "metrics": {
+        "started_at": 1792488096.058939,
+        "model_calls": 2,
+        "input_tokens": 2002,
+        "output_tokens": 207,
+        "total_tokens": 2209,
+        "usage_reported_calls": 3,
+        "reply_calls": 1,
+        "finished_at": 1792488114.4070199,
+        "elapsed_seconds": 18.348
+      }
+    },
+    {
+      "thread_id": "deploy-b738109194-1",
+      "customer_id": "learner-001",
+      "status": "completed",
+      "messages": [
+        {
+          "type": "human",
+          "content": "请为订单 DEMO-004 申请模拟退款10.00元，原因：差价退款。",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "我先查询订单信息，确认实付金额和已退金额。",
+          "tool_calls": [
+            {
+              "name": "get_order",
+              "args": {
+                "order_id": "DEMO-004"
+              },
+              "id": "call_00_LZierPt77LOsklcNTmpr5851",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"found\": true, \"order\": {\"order_id\": \"DEMO-004\", \"customer_id\": \"learner-001\", \"sku\": \"SKU-002\", \"quantity\": 1, \"reshipped_quantity\": 0, \"status\": \"paid\", \"paid_amount\": \"499.00\", \"refunded_amount\": \"0.00\"}}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "订单已确认：实付 499.00 元，已退 0.00 元，本次申请 10.00 元在可退范围内。现在提交退款申请。",
+          "tool_calls": [
+            {
+              "name": "prepare_action",
+              "args": {
+                "kind": "refund",
+                "order_id": "DEMO-004",
+                "amount": "10.00",
+                "description": "差价退款"
+              },
+              "id": "call_00_HLzhCDTTz3Cie3Qj8gjp6256",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"proposal\": {\"action_id\": \"ff6b5c33-6f93-4af6-98c1-addc6b88f28d\", \"customer_id\": \"learner-001\", \"thread_id\": \"deploy-b738109194-1\", \"kind\": \"refund\", \"order_id\": \"DEMO-004\", \"description\": \"差价退款\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-20T09:22:01.436071+00:00\", \"amount\": \"10.00\"}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "工单 525d6621-bf85-4fc4-b18f-8d1080c7bb96（订单 DEMO-004）的退款已处理：退款单号 b5f7c56f-c6f9-406e-a8dc-6ee5f6403bd3，金额 10.00 元，状态为已解决。该退款为模拟业务。",
+          "tool_calls": []
+        }
+      ],
+      "proposal": {
+        "action_id": "ff6b5c33-6f93-4af6-98c1-addc6b88f28d",
+        "customer_id": "learner-001",
+        "thread_id": "deploy-b738109194-1",
+        "kind": "refund",
+        "order_id": "DEMO-004",
+        "description": "差价退款",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "kind": "refund",
+          "amount": "10.00",
+          "case_id": "525d6621-bf85-4fc4-b18f-8d1080c7bb96",
+          "order_id": "DEMO-004",
+          "refund_id": "b5f7c56f-c6f9-406e-a8dc-6ee5f6403bd3",
+          "simulated": true,
+          "case_status": "resolved"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-20T09:22:01.436071+00:00",
+        "amount": "10.00"
+      },
+      "final_answer": "工单 525d6621-bf85-4fc4-b18f-8d1080c7bb96（订单 DEMO-004）的退款已处理：退款单号 b5f7c56f-c6f9-406e-a8dc-6ee5f6403bd3，金额 10.00 元，状态为已解决。该退款为模拟业务。",
+      "next_nodes": [],
+      "metrics": {
+        "started_at": 1792488114.5158975,
+        "model_calls": 2,
+        "input_tokens": 1952,
+        "output_tokens": 273,
+        "total_tokens": 2225,
+        "usage_reported_calls": 3,
+        "reply_calls": 1,
+        "finished_at": 1792488123.747159,
+        "elapsed_seconds": 9.231
+      }
+    },
+    {
+      "thread_id": "deploy-b738109194-2",
+      "customer_id": "learner-001",
+      "status": "completed",
+      "messages": [
+        {
+          "type": "human",
+          "content": "请为订单 DEMO-001 申请模拟补发一件，原因：收到商品破损。",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "我先查询订单和物流信息，确认是否满足补发条件。",
+          "tool_calls": [
+            {
+              "name": "get_order",
+              "args": {
+                "order_id": "DEMO-001"
+              },
+              "id": "call_00_pjPg5U9USdg6p50dlltW8158",
+              "type": "tool_call"
+            },
+            {
+              "name": "get_shipments",
+              "args": {
+                "order_id": "DEMO-001"
+              },
+              "id": "call_01_8smTR7W0jZjSNfzseIuK9364",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"found\": true, \"order\": {\"order_id\": \"DEMO-001\", \"customer_id\": \"learner-001\", \"sku\": \"SKU-001\", \"quantity\": 1, \"reshipped_quantity\": 0, \"status\": \"shipped\", \"paid_amount\": \"199.00\", \"refunded_amount\": \"0.00\"}}",
+          "tool_calls": []
+        },
+        {
+          "type": "tool",
+          "content": "{\"shipments\": [{\"shipment_id\": \"SHIP-001\", \"order_id\": \"DEMO-001\", \"carrier\": \"模拟快递\", \"tracking_number\": \"TRACK-001\", \"status\": \"in_transit\", \"description\": \"运输中\", \"updated_at\": \"2026-10-18T09:00:00+00:00\"}, {\"shipment_id\": \"SHIP-002\", \"order_id\": \"DEMO-001\", \"carrier\": \"模拟快递\", \"tracking_number\": \"TRACK-002\", \"status\": \"exception\", \"description\": \"派送异常，待核实地址\", \"updated_at\": \"2026-10-19T09:00:00+00:00\"}]}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "订单已发货，符合补发前提。我再确认一下库存。",
+          "tool_calls": [
+            {
+              "name": "get_inventory",
+              "args": {
+                "sku": "SKU-001"
+              },
+              "id": "call_00_X2WX250Jx3wCfShaPMw48036",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"sku\": \"SKU-001\", \"available\": 5}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "库存充足，我提交补发申请。",
+          "tool_calls": [
+            {
+              "name": "prepare_action",
+              "args": {
+                "kind": "reship",
+                "order_id": "DEMO-001",
+                "quantity": 1,
+                "description": "客户反馈收到商品破损，申请模拟补发 1 件 SKU-001（订单 DEMO-001，已发货，库存可用 5 件）。"
+              },
+              "id": "call_00_7HxAKtuNRmB4nmBRRwfZ5073",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"proposal\": {\"action_id\": \"e744fef1-e425-4543-8f19-815e13d15733\", \"customer_id\": \"learner-001\", \"thread_id\": \"deploy-b738109194-2\", \"kind\": \"reship\", \"order_id\": \"DEMO-001\", \"description\": \"客户反馈收到商品破损，申请模拟补发 1 件 SKU-001（订单 DEMO-001，已发货，库存可用 5 件）。\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-20T09:22:11.016919+00:00\", \"amount\": null}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "工单 60fe0290-2bcc-4497-9d37-0bb516ace7bd（订单 DEMO-001，SKU-001）的补发为模拟业务，补发单号 a47c4c3c-90bd-4679-8322-1ee38063ffa5，数量 1；工单状态 open，待处理。",
+          "tool_calls": []
+        }
+      ],
+      "proposal": {
+        "action_id": "e744fef1-e425-4543-8f19-815e13d15733",
+        "customer_id": "learner-001",
+        "thread_id": "deploy-b738109194-2",
+        "kind": "reship",
+        "order_id": "DEMO-001",
+        "description": "客户反馈收到商品破损，申请模拟补发 1 件 SKU-001（订单 DEMO-001，已发货，库存可用 5 件）。",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "sku": "SKU-001",
+          "kind": "reship",
+          "case_id": "60fe0290-2bcc-4497-9d37-0bb516ace7bd",
+          "order_id": "DEMO-001",
+          "quantity": 1,
+          "reship_id": "a47c4c3c-90bd-4679-8322-1ee38063ffa5",
+          "simulated": true,
+          "case_status": "open"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-20T09:22:11.016919+00:00",
+        "amount": null
+      },
+      "final_answer": "工单 60fe0290-2bcc-4497-9d37-0bb516ace7bd（订单 DEMO-001，SKU-001）的补发为模拟业务，补发单号 a47c4c3c-90bd-4679-8322-1ee38063ffa5，数量 1；工单状态 open，待处理。",
+      "next_nodes": [],
+      "metrics": {
+        "started_at": 1792488123.8306682,
+        "model_calls": 3,
+        "input_tokens": 3414,
+        "output_tokens": 359,
+        "total_tokens": 3773,
+        "usage_reported_calls": 4,
+        "reply_calls": 1,
+        "finished_at": 1792488133.573946,
+        "elapsed_seconds": 9.743
+      }
+    },
+    {
+      "thread_id": "deploy-b738109194-3",
+      "customer_id": "learner-001",
+      "status": "rejected",
+      "messages": [
+        {
+          "type": "human",
+          "content": "请为订单 DEMO-002 申请物流异常工单，描述：模拟拒绝流程验证。",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "I'll look up the order and its shipments first.",
+          "tool_calls": [
+            {
+              "name": "get_order",
+              "args": {
+                "order_id": "DEMO-002"
+              },
+              "id": "call_00_WXdlwYS4Vi5jtn9VJOCQ6745",
+              "type": "tool_call"
+            },
+            {
+              "name": "get_shipments",
+              "args": {
+                "order_id": "DEMO-002"
+              },
+              "id": "call_01_NAFTno1B8JLzubK9nfGh1349",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"found\": true, \"order\": {\"order_id\": \"DEMO-002\", \"customer_id\": \"learner-001\", \"sku\": \"SKU-001\", \"quantity\": 1, \"reshipped_quantity\": 0, \"status\": \"delivered\", \"paid_amount\": \"299.00\", \"refunded_amount\": \"0.00\"}}",
+          "tool_calls": []
+        },
+        {
+          "type": "tool",
+          "content": "{\"shipments\": []}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "订单 DEMO-002 存在（状态为已签收，实付 ¥299.00，已退 ¥0.00），但物流查询返回的包裹记录为空。空记录不能证明包裹不存在或属于他人，因此我无法据此确认物流异常的具体情况。\n\n我先按您的要求提交物流异常申请，交由人工审批核实：",
+          "tool_calls": [
+            {
+              "name": "prepare_action",
+              "args": {
+                "kind": "logistics",
+                "order_id": "DEMO-002",
+                "description": "模拟拒绝流程验证（客户申请物流异常工单；当前物流查询返回空包裹记录，需人工核实）"
+              },
+              "id": "call_00_c2b56MgnYPHTaQYsw1hS4871",
+              "type": "tool_call"
+            }
+          ]
+        },
+        {
+          "type": "tool",
+          "content": "{\"proposal\": {\"action_id\": \"2570434b-93e2-4474-8912-64722245c6f3\", \"customer_id\": \"learner-001\", \"thread_id\": \"deploy-b738109194-3\", \"kind\": \"logistics\", \"order_id\": \"DEMO-002\", \"description\": \"模拟拒绝流程验证（客户申请物流异常工单；当前物流查询返回空包裹记录，需人工核实）\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-20T09:22:18.045920+00:00\", \"amount\": null}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+          "tool_calls": []
+        },
+        {
+          "type": "ai",
+          "content": "申请已被拒绝，未执行业务操作。",
+          "tool_calls": []
+        }
+      ],
+      "proposal": {
+        "action_id": "2570434b-93e2-4474-8912-64722245c6f3",
+        "customer_id": "learner-001",
+        "thread_id": "deploy-b738109194-3",
+        "kind": "logistics",
+        "order_id": "DEMO-002",
+        "description": "模拟拒绝流程验证（客户申请物流异常工单；当前物流查询返回空包裹记录，需人工核实）",
+        "quantity": 1,
+        "version": 1,
+        "status": "rejected",
+        "result": null,
+        "approver": "reviewer",
+        "created_at": "2026-10-20T09:22:18.045920+00:00",
+        "amount": null
+      },
+      "final_answer": "申请已被拒绝，未执行业务操作。",
+      "next_nodes": [],
+      "metrics": {
+        "started_at": 1792488133.654937,
+        "model_calls": 2,
+        "input_tokens": 1841,
+        "output_tokens": 252,
+        "total_tokens": 2093,
+        "usage_reported_calls": 2,
+        "finished_at": 1792488138.1421874,
+        "elapsed_seconds": 4.487
+      }
+    }
+  ],
+  "api_container_restart_restored_same_pending_action": true,
+  "passed": true
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "owner": "learner-001",
+    "tools": [
+      "get_order",
+      "get_shipments",
+      "get_inventory",
+      "get_case",
+      "execute_action"
+    ],
+    "order_found": true,
+    "unbound_execute_denied": true
+  },
+  {
+    "owner": "learner-002",
+    "tools": [
+      "get_order",
+      "get_shipments",
+      "get_inventory",
+      "get_case",
+      "execute_action"
+    ],
+    "order_found": false,
+    "unbound_execute_denied": true
+  }
+]

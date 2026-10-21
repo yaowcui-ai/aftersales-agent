@@ -1,0 +1,14 @@
+........................................................................ [ 90%]
+........                                                                 [100%]
+============================== warnings summary ===============================
+tests/delivery/test_agent.py::test_mcp_http_rejects_session_token_and_scopes_execute
+  C:\Users\86139\Documents\ChatGPT\ʵϰ��Ŀ\aftersales-agent\.venv\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/delivery/test_mcp_protocol.py::test_real_mcp_protocol_context_isolation_and_approval_gate
+tests/delivery/test_mcp_protocol.py::test_real_mcp_protocol_context_isolation_and_approval_gate
+  C:\Users\86139\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:105: DeprecationWarning: Use `streamable_http_client` instead.
+    self.gen = func(*args, **kwds)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+80 passed, 3 warnings in 32.17s

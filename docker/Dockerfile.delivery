@@ -1,0 +1,20 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+ENV UV_PROJECT_ENVIRONMENT=/usr/local \
+    UV_COMPILE_BYTECODE=1 \
+    PYTHONPATH=/app/src \
+    PYTHONUNBUFFERED=1
+
+RUN pip install --no-cache-dir uv==0.12.5
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-install-project --no-dev
+
+# Copy source explicitly: project .env files and credentials never enter the image.
+COPY src/ ./src/
+COPY scripts/setup_delivery.py ./scripts/setup_delivery.py
+COPY LICENSE ./LICENSE
+RUN mkdir -p /app/output/delivery
+
+EXPOSE 8090 8091 8510
+CMD ["python", "-m", "uvicorn", "aftersales_delivery.api:app", "--host", "0.0.0.0", "--port", "8090", "--workers", "1"]

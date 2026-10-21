@@ -1,0 +1,14 @@
+{
+  "mysql_refund_race": [
+    "completed",
+    "REFUND_LIMIT"
+  ],
+  "refunded_amount": "7.00",
+  "mysql_inventory_race": [
+    "completed",
+    "OUT_OF_STOCK"
+  ],
+  "available": 0,
+  "four_concurrent_replays_same_result": true,
+  "fixture_suffix": "a3db8cf6d9"
+}

@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "steps": [
+    {
+      "name": "customer_chat_dialog_and_composer_visible",
+      "elapsed_seconds": 4.8
+    },
+    {
+      "name": "previous_day_mysql_history_loaded_without_state_change",
+      "elapsed_seconds": 5.44
+    },
+    {
+      "name": "new_dialog_query_real_model_and_mcp_completed",
+      "elapsed_seconds": 13.11
+    },
+    {
+      "name": "followup_saved_under_original_thread",
+      "elapsed_seconds": 17.28
+    },
+    {
+      "name": "recent_conversations_switched_without_model_or_business_changes",
+      "elapsed_seconds": 18.05
+    },
+    {
+      "name": "fresh_login_restored_entire_multi_turn_history_from_mysql",
+      "elapsed_seconds": 19.69
+    },
+    {
+      "name": "reviewer_and_case_progress_views_remain_available",
+      "elapsed_seconds": 20.41
+    }
+  ],
+  "screenshots": [
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\01-chat-dialog.png",
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\02-previous-day-history.png",
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\03-query-reply.png",
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\04-followup-same-dialog.png",
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\05-switch-history.png",
+    "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent\\output\\delivery\\chat-ui-20261021\\06-history-after-browser-refresh.png"
+  ],
+  "page_error_count": 0,
+  "previous_day_thread": "deploy-b738109194-0",
+  "query_thread": "delivery-f31946cb-74ff-4279-b17d-b15217240195",
+  "elapsed_seconds": 21.0
+}

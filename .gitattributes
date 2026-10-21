@@ -1,0 +1,4 @@
+# Preserve evaluated source and raw evidence bytes across operating systems.
+* -text
+*.png binary
+*.webm binary
