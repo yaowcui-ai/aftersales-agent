@@ -10,7 +10,7 @@ from mcp.client.streamable_http import streamablehttp_client
 from aftersales_delivery.business import BusinessError
 from aftersales_delivery.security import issue_token
 
-READ_TOOLS = {"get_order", "get_shipments", "get_inventory", "get_case"}
+READ_TOOLS = {"list_orders", "get_order", "get_shipments", "get_inventory", "get_case"}
 
 
 def http_client(headers=None, timeout=None, auth=None):

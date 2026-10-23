@@ -95,6 +95,8 @@ class Runtime:
 
     async def read(self, customer, name, arguments):
         if self.local_tools:
+            if name == "list_orders":
+                return await self.store.list_orders(customer, **arguments)
             if name == "get_order":
                 order = await self.store.get_order(customer, arguments["order_id"])
                 return {"found": order is not None, "order": order}

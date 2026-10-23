@@ -56,6 +56,11 @@ def create_app(config=None):
             raise ToolError("TOOL_UNAVAILABLE") from None
 
     @server.tool()
+    async def list_orders(ctx: Context, limit: int = 20, offset: int = 0) -> str:
+        """无需订单号，查询当前客户订单总数及分页列表；只展示可信身份所属订单。"""
+        return await guarded(store.list_orders(claims(ctx)["customer_id"], limit, offset))
+
+    @server.tool()
     async def get_order(order_id: str, ctx: Context) -> str:
         """查询当前客户的订单及实付、已退款金额。未找到不表示订单全局不存在。"""
         owner = claims(ctx)["customer_id"]

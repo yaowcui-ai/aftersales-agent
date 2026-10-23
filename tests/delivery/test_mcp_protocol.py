@@ -49,6 +49,7 @@ async def test_real_mcp_protocol_context_isolation_and_approval_gate(tmp_path):
                         await session.initialize()
                         tools = await session.list_tools()
                         assert {t.name for t in tools.tools} == {
+                            "list_orders",
                             "get_order",
                             "get_shipments",
                             "get_inventory",

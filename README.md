@@ -9,6 +9,7 @@
 ## 可以验证什么
 
 - **聊天与历史**：查询并多轮追问；按原任务编号从 MySQL checkpoint 加载历史；切换对话不重复发送用户消息。
+- **我的订单**：直接询问“我现在有几个订单”或“列出我的订单”，通过 `list_orders` 获取当前客户订单总数和分页列表，无需先提供订单号；支持继续追问“下一页”。
 - **工具与权限**：通过独立 Streamable HTTP MCP 查询订单、物流、库存和工单。身份来自服务端，不允许模型填写客户身份；查询限制订单归属。
 - **审批执行**：模型只能提出 `prepare_action`；LangGraph `interrupt` 暂停。审批员提交决定后，受控节点才调用 `execute_action`。
 - **幂等与并发**：同一动作复用已保存结果，参数改变报冲突；事务、唯一约束和条件更新限制重复退款、重复补发与超卖。
@@ -18,15 +19,18 @@
 
 | 验证 | 当前公开口径 | 原始记录 |
 | --- | --- | --- |
-| 应用离线测试 | 80 项通过，使用替身模型及隔离 SQLite | [pytest 输出](evaluation/results/offline-tests.txt) |
+| 应用离线测试 | 83 项通过，使用替身模型及隔离 SQLite | [pytest 输出](evaluation/results/offline-tests.txt) |
+| 订单列表功能验证 | 真实 MySQL / MCP、模型查询与浏览器同会话翻页通过（2026-10-22） | [模型及 MCP](evaluation/results/order-list-live-20261022.json) · [浏览器](evaluation/results/order-list-browser-20261022.json) |
 | 真实浏览器 | 7 个聊天、追问、历史切换与刷新恢复步骤通过 | [浏览器记录](evaluation/results/chat-ui-browser.json) |
 | 真实 MySQL / MCP / Docker | 并发退款、库存竞争、幂等重放及完整审批业务验收 | [MySQL](evaluation/results/mysql-concurrency.json) · [MCP](evaluation/results/mcp-http.json) · [Docker](evaluation/results/docker-end-to-end.json) |
-| 真实模型新一轮回归复测 | **140 / 144，97.2%**（2026-10-21） | [新轮 JSON](evaluation/results/latest.json) · [逐次 JSONL](evaluation/results/latest.jsonl) |
+| 发布基线真实模型回归复测 | **140 / 144，97.2%**（2026-10-21） | [基线 JSON](evaluation/results/latest.json) · [逐次 JSONL](evaluation/results/latest.jsonl) |
 | 历史完整评测 | 129 / 144，89.6%，保留全部失败 | [历史 JSON](evaluation/results/historical-20261020.json) · [逐次 JSONL](evaluation/results/historical-20261020.jsonl) |
 
 真实模型评测采用冻结的 48 案例，每例 3 次。最终成功须同时满足预期动作、权限、回复及数据库结果，不能只看 HTTP 200 或模型说“成功”。新轮是查看过历史结果后的回归复测；原 `heldout` 分组保留用于对照，不再代表未见独立测试集。历史并发 3、新轮并发 2，不能把结果差异直接解释为模型能力提升。
 
 指标包括系统内部的有限重试，以及评测协议允许的原动作回复恢复；不是每次第一次调用的成功率。固定关键词判据也有误判和覆盖局限，详见[评测说明](docs/delivery/evaluation.md)。
+
+140/144 对应发布基线 `5e31a1e`。后续新增订单列表工具及提示词改动已完成专项验证和离线回归，尚未重新运行完整 144 次真实模型评测；历史原始结果保留不变。
 
 面试官无需 API Key 即可复算公开报告：
 

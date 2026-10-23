@@ -11,7 +11,7 @@ from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 from uuid import uuid4
 
-from sqlalchemy import insert, select, update
+from sqlalchemy import LargeBinary, cast, func, insert, select, update
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncEngine
 
@@ -139,6 +139,31 @@ class Store:
                 created_at=_now(),
             )
         )
+
+    async def list_orders(self, customer, limit=20, offset=0):
+        """Count and page only the exact trusted customer's orders; never write."""
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise BusinessError("INVALID_LIMIT")
+        if type(offset) is not int or not 0 <= offset <= 2_000_000_000:
+            raise BusinessError("INVALID_OFFSET")
+        # Validate without normalizing a trusted identity into another account.
+        _text(customer, "customer")
+        async with self.engine.connect() as conn:
+            # Retain the indexed equality and reject case/trailing-space aliases.
+            owner = (orders.c.customer_id == customer) & (
+                cast(orders.c.customer_id, LargeBinary) == customer.encode("utf-8")
+            )
+            total = await conn.scalar(select(func.count()).select_from(orders).where(owner))
+            rows = (await conn.execute(
+                select(orders).where(owner).order_by(orders.c.order_id)
+                .limit(limit).offset(offset)
+            )).mappings().all()
+        has_more = offset + len(rows) < total
+        return {
+            "total": total, "orders": [_order(row) for row in rows],
+            "limit": limit, "offset": offset, "has_more": has_more,
+            "next_offset": offset + len(rows) if has_more else None,
+        }
 
     async def get_order(self, customer, order):
         async with self.engine.connect() as conn:
