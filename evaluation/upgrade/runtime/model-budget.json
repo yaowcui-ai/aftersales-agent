@@ -33,9 +33,15 @@
       "confirmed_http_calls": null,
       "application_calls": 1,
       "tokens": 234
+    },
+    {
+      "scope": "v2_single_development_condition_three_repetitions",
+      "confirmed_http_calls": 7,
+      "application_calls": 7,
+      "tokens": 10764
     }
   ],
-  "observed_application_calls": 49,
-  "observed_tokens": 70576,
-  "scope_note": "37 HTTP attempts counted directly in experimental ledger. Product application metrics exclude unobserved SDK-internal HTTP retries; no claim that every provider HTTP attempt is measured."
+  "observed_application_calls": 56,
+  "observed_tokens": 81340,
+  "scope_note": "44 HTTP attempts counted directly in experimental ledgers. Product application metrics exclude unobserved SDK-internal HTTP retries; no claim that every provider HTTP attempt is measured."
 }

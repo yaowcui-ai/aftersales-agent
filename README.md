@@ -110,9 +110,10 @@ docker compose --env-file .env.delivery -f compose.upgrade.yaml exec -T api pyth
 | React退货/退款闭环 | 界面批准退款、退货授权、收货后退款 | [轨迹/截图](frontend/evidence/real-browser-flow/) |
 | 新结构化业务回归 | 128条件、136run、135通过；不是LLM成功率 | [v2原始记录](evaluation/upgrade/runs/v2-b0-final/) |
 | 有限真实模型对照 | 6条件、18模型run、37HTTP；B2 5/6、B3 4/6 | [原始结果](evaluation/upgrade/runs/live-paired-six-frozen/) |
+| v2核心重复验证 | 1个已见开发条件×3次，3/3通过，7HTTP；不代表泛化成功率 | [逐次数据库/轨迹](evaluation/upgrade/runs/v2-live-core-repeat/) |
 | 历史基线 | 140/144，97.2%，仅对应2026-10-21版本 | [旧记录](evaluation/results/latest.json) |
 
-**保留的失败**：结构化U082错误码与冻结预期不同；真实v1含U045文案/表单冲突，B1是不可公平比较的单次picker，B3另有物流任务未形成申请。v2已修正文案并实现公平手写循环B1，但未重跑真实模型，不用Mock冒充新成功率。真实模型结果尚不足以证明完整图提高决策准确率。
+**保留的失败**：结构化U082错误码与冻结预期不同；真实v1含U045文案/表单冲突，B1是不可公平比较的单次picker，B3另有物流任务未形成申请。v2已修正文案并实现公平手写循环B1，但未重跑四臂真实对照；只额外对B3的U001做三次真实重复，不用Mock冒充新成功率。真实模型结果尚不足以证明完整图提高决策准确率。
 
 [评测设计](docs/EXPERIMENT_DESIGN.md) · [评测报告](docs/AGENT_EVALUATION_REPORT.md) · [安全报告](docs/SECURITY_TEST_REPORT.md) · [故障报告](docs/FAULT_INJECTION_REPORT.md) · [业务价值](docs/BUSINESS_VALUE.md) · [简历证据](docs/RESUME_EVIDENCE.md)。
 

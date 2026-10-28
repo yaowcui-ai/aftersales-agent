@@ -1,0 +1,17 @@
+{
+  "time_utc": "2026-10-28T12:13:03.254183+00:00",
+  "existing_observed_application_calls": 49,
+  "existing_observed_tokens": 70576,
+  "selected_case_ids": [
+    "U001"
+  ],
+  "baseline": "B3",
+  "independent_conditions": 1,
+  "repetitions": 3,
+  "split": "dev",
+  "max_additional_http_calls": 10,
+  "max_additional_estimated_tokens": 40000,
+  "expected_usage": "about 9 calls and 13500 provider-reported tokens, based on prior U001",
+  "stop_rule": "shared direct HTTP ledger; no implicit retry and no rerun on failure",
+  "scope": "Previously seen development case repeated in independent temporary SQLite fixtures; not holdout accuracy or production concurrency evidence"
+}

@@ -57,7 +57,7 @@ def verify(directory):
 
 
 def main():
-    for name in ("v2-b0-final", "v2-fair-mock-final", "live-paired-six-frozen"):
+    for name in ("v2-b0-final", "v2-fair-mock-final", "live-paired-six-frozen", "v2-live-core-repeat"):
         print(json.dumps(verify(ROOT / "evaluation/upgrade/runs" / name)))
     print("UPGRADE_EVIDENCE_REJUDGED_PASS")
 
