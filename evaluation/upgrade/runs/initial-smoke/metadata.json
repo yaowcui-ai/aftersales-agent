@@ -1,0 +1,48 @@
+{
+  "started_at": "2026-10-28T02:37:26.187329+00:00",
+  "source_sha256": {
+    "evaluation/upgrade/cases.json": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "scripts/evaluate_upgrade.py": "22b8b1219549a121dd9d35730dc3116e21980a824e772d4b1e3a2bc00043fffa",
+    "src/aftersales_delivery/business.py": "5850c99f4021e0339c002cbf20d9f138842b486d200e849a5abd9fabd665f499",
+    "src/aftersales_delivery/policies.py": "a6f5661652115d7c7d175df8308389527b2fe0fdb467042d339fff6fa8716a92",
+    "src/aftersales_delivery/agent.py": "b36bac96103cfdfe3cdb1cdb171f92b0c86c3375168c981a2d742695a3a9a799",
+    "uv.lock": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e"
+  },
+  "catalog": {
+    "valid": true,
+    "sha256": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "case_count": 128,
+    "split_counts": {
+      "dev": 83,
+      "validation": 24,
+      "test": 21
+    },
+    "categories": {
+      "refund": 14,
+      "return": 12,
+      "reship": 14,
+      "read": 12,
+      "logistics": 10,
+      "clarification": 10,
+      "revision": 10,
+      "security": 14,
+      "approval": 12,
+      "state": 12,
+      "fault": 8
+    },
+    "evidence_type": "scenario_catalog_quality_only"
+  },
+  "baseline": "B0",
+  "mode": "deterministic",
+  "selected_case_ids": [
+    "U001",
+    "U015"
+  ],
+  "coverage_fraction": 0.015625,
+  "split": "all",
+  "budget": {
+    "max_http_calls": 60,
+    "max_estimated_tokens": 120000
+  },
+  "scope": "Temporary SQLite; Store policy boundary. No real payments, no MySQL/MCP/browser evidence."
+}

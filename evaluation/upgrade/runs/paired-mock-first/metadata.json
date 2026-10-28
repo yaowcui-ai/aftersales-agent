@@ -1,0 +1,64 @@
+{
+  "started_at": "2026-10-28T02:42:04.387777+00:00",
+  "source_sha256": {
+    "evaluation/upgrade/cases.json": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "scripts/evaluate_upgrade.py": "ca1f0f9ad0dd633071cfad2d7cafe06e0541cb1037e3ca36751994734c855593",
+    "scripts/upgrade_eval/models.py": "452be8b77ab08ba504e3574449f4dd6770aba18f17bfe50bd4d0dc6d597e1604",
+    "src/aftersales_delivery/business.py": "3b605d765e35fd06e60247114dafadae22436db4e9601abda2d5c99273d4acad",
+    "src/aftersales_delivery/policies.py": "df003ed0d4d9976f338bea7a9ec336b140e66f09d00ee18cc33808e9d644ef84",
+    "src/aftersales_delivery/agent.py": "b36bac96103cfdfe3cdb1cdb171f92b0c86c3375168c981a2d742695a3a9a799",
+    "uv.lock": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e"
+  },
+  "catalog": {
+    "valid": true,
+    "sha256": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "case_count": 128,
+    "split_counts": {
+      "dev": 83,
+      "validation": 24,
+      "test": 21
+    },
+    "categories": {
+      "refund": 14,
+      "return": 12,
+      "reship": 14,
+      "read": 12,
+      "logistics": 10,
+      "clarification": 10,
+      "revision": 10,
+      "security": 14,
+      "approval": 12,
+      "state": 12,
+      "fault": 8
+    },
+    "evidence_type": "scenario_catalog_quality_only"
+  },
+  "baselines": [
+    "B0",
+    "B1",
+    "B2",
+    "B3"
+  ],
+  "mode": "deterministic",
+  "selected_case_ids": [
+    "U001",
+    "U015",
+    "U027",
+    "U041",
+    "U053",
+    "U063",
+    "U080",
+    "U083",
+    "U097",
+    "U109",
+    "U121",
+    "U002"
+  ],
+  "coverage_fraction": 0.09375,
+  "split": "all",
+  "budget": {
+    "max_http_calls": 60,
+    "max_estimated_tokens": 120000
+  },
+  "scope": "Temporary SQLite; Store policy boundary. No real payments, no MySQL/MCP/browser evidence."
+}

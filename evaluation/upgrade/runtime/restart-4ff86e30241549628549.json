@@ -1,0 +1,227 @@
+{
+  "run_id": "restart-4ff86e30241549628549",
+  "time_utc": "2026-10-28T07:17:06.789045+00:00",
+  "success": true,
+  "scope": "Real isolated Docker MySQL, independent MCP outage, API process replacement",
+  "simulated_business": true,
+  "steps": [
+    {
+      "phase": "mcp_outage_after_approval",
+      "http_status": 503,
+      "response": {
+        "detail": {
+          "code": "OPERATION_INCOMPLETE",
+          "message": "操作或回复未完成，请先读取保存状态；已批准动作沿用原编号重试。"
+        }
+      },
+      "saved_task": {
+        "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+        "customer_id": "learner-001",
+        "status": "approved",
+        "messages": [
+          {
+            "type": "human",
+            "content": "表单申请：{\"request_id\": \"restart-4ff86e30241549628549\", \"kind\": \"refund\", \"order_id\": \"UP-PAID\", \"description\": \"沙箱故障注入：MCP断开及API进程重启，原动作恢复。\", \"amount\": \"0.10\", \"quantity\": 1}",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+          "customer_id": "learner-001",
+          "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+          "kind": "refund",
+          "order_id": "UP-PAID",
+          "description": "沙箱故障注入：MCP断开及API进程重启，原动作恢复。",
+          "quantity": 1,
+          "version": 1,
+          "status": "approved",
+          "result": null,
+          "approver": "reviewer",
+          "created_at": "2026-10-28T07:17:07.468879+00:00",
+          "amount": "0.10",
+          "ticket_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": {
+            "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+            "object_type": "order",
+            "object_id": "UP-PAID",
+            "version": 1,
+            "decision": "approved",
+            "actor": "reviewer",
+            "reason": "故障注入前已核验冻结参数",
+            "snapshot": {
+              "sku": "UP-SKU",
+              "kind": "refund",
+              "version": 1,
+              "order_id": "UP-PAID",
+              "quantity": 1,
+              "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+              "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+              "created_at": "2026-10-28T07:17:07.468879+00:00",
+              "customer_id": "learner-001",
+              "description": "沙箱故障注入：MCP断开及API进程重启，原动作恢复。",
+              "amount_cents": 10
+            },
+            "snapshot_hash": "f313d5f5fa8f15af1e77170d01c48979e6111845c1b054dae734b59387e24214",
+            "created_at": "2026-10-28T07:17:09.852581+00:00"
+          },
+          "return_status": null
+        },
+        "final_answer": null,
+        "next_nodes": [
+          "execute"
+        ],
+        "metrics": {
+          "started_at": 1793171827.526508,
+          "source": "form",
+          "elapsed_seconds": 10.294
+        },
+        "business_status": "approved"
+      }
+    },
+    {
+      "phase": "recover_original_action",
+      "http_status": 200,
+      "response": {
+        "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+        "customer_id": "learner-001",
+        "status": "completed",
+        "messages": [
+          {
+            "type": "human",
+            "content": "表单申请：{\"request_id\": \"restart-4ff86e30241549628549\", \"kind\": \"refund\", \"order_id\": \"UP-PAID\", \"description\": \"沙箱故障注入：MCP断开及API进程重启，原动作恢复。\", \"amount\": \"0.10\", \"quantity\": 1}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "工单 6ec6135a-3219-4abf-abe6-8881a2429091（订单 UP-PAID）已执行模拟退款，金额 0.10，退款编号 f2ad3c41-0b43-49c8-98a9-42585a9081d9，工单状态为已解决。",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+          "customer_id": "learner-001",
+          "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+          "kind": "refund",
+          "order_id": "UP-PAID",
+          "description": "沙箱故障注入：MCP断开及API进程重启，原动作恢复。",
+          "quantity": 1,
+          "version": 1,
+          "status": "completed",
+          "result": {
+            "kind": "refund",
+            "amount": "0.10",
+            "case_id": "6ec6135a-3219-4abf-abe6-8881a2429091",
+            "order_id": "UP-PAID",
+            "refund_id": "f2ad3c41-0b43-49c8-98a9-42585a9081d9",
+            "simulated": true,
+            "case_status": "resolved"
+          },
+          "approver": "reviewer",
+          "created_at": "2026-10-28T07:17:07.468879+00:00",
+          "amount": "0.10",
+          "ticket_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": {
+            "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+            "object_type": "order",
+            "object_id": "UP-PAID",
+            "version": 1,
+            "decision": "approved",
+            "actor": "reviewer",
+            "reason": "故障注入前已核验冻结参数",
+            "snapshot": {
+              "sku": "UP-SKU",
+              "kind": "refund",
+              "version": 1,
+              "order_id": "UP-PAID",
+              "quantity": 1,
+              "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+              "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+              "created_at": "2026-10-28T07:17:07.468879+00:00",
+              "customer_id": "learner-001",
+              "description": "沙箱故障注入：MCP断开及API进程重启，原动作恢复。",
+              "amount_cents": 10
+            },
+            "snapshot_hash": "f313d5f5fa8f15af1e77170d01c48979e6111845c1b054dae734b59387e24214",
+            "created_at": "2026-10-28T07:17:09.852581+00:00"
+          },
+          "return_status": null
+        },
+        "final_answer": "工单 6ec6135a-3219-4abf-abe6-8881a2429091（订单 UP-PAID）已执行模拟退款，金额 0.10，退款编号 f2ad3c41-0b43-49c8-98a9-42585a9081d9，工单状态为已解决。",
+        "next_nodes": [],
+        "metrics": {
+          "started_at": 1793171827.526508,
+          "source": "form",
+          "reply_calls": 1,
+          "input_tokens": 155,
+          "output_tokens": 79,
+          "total_tokens": 234,
+          "usage_reported_calls": 1,
+          "finished_at": 1793171867.8482382,
+          "elapsed_seconds": 40.322
+        },
+        "business_status": "completed"
+      }
+    }
+  ],
+  "container_before": {
+    "container_id": "5864d97f1a3377e72c038a8bdef280e7b1d05d65184df86990310d566536f6c7",
+    "pid": 3552,
+    "started_at": "2026-10-28T07:12:03.34997872Z"
+  },
+  "container_after": {
+    "container_id": "f6b842614d446a2bf2df5c7a13cd210c2c3157741110a0141db8c3b0840e963c",
+    "pid": 17296,
+    "started_at": "2026-10-28T07:17:26.624575141Z"
+  },
+  "action_id": "41b6a5f9-2730-481d-8938-590783ce06d8",
+  "thread_id": "form-49b84e8724ed72010e4def5dbd0612bd23109605",
+  "before_order": {
+    "order_id": "UP-PAID",
+    "customer_id": "learner-001",
+    "sku": "UP-SKU",
+    "quantity": 2,
+    "reshipped_quantity": 0,
+    "status": "paid",
+    "paid_amount": "199.00",
+    "refunded_amount": "1.00",
+    "policy": {
+      "order_id": "UP-PAID",
+      "aftersales_until": "2026-11-27T02:41:48.910039+00:00",
+      "risk_level": "low",
+      "manual_review_threshold_cents": 50000
+    }
+  },
+  "after_order": {
+    "order_id": "UP-PAID",
+    "customer_id": "learner-001",
+    "sku": "UP-SKU",
+    "quantity": 2,
+    "reshipped_quantity": 0,
+    "status": "paid",
+    "paid_amount": "199.00",
+    "refunded_amount": "1.10",
+    "policy": {
+      "order_id": "UP-PAID",
+      "aftersales_until": "2026-11-27T02:41:48.910039+00:00",
+      "risk_level": "low",
+      "manual_review_threshold_cents": 50000
+    }
+  },
+  "model_reply_calls": 1,
+  "model_tokens": 234,
+  "final_result": {
+    "kind": "refund",
+    "amount": "0.10",
+    "case_id": "6ec6135a-3219-4abf-abe6-8881a2429091",
+    "order_id": "UP-PAID",
+    "refund_id": "f2ad3c41-0b43-49c8-98a9-42585a9081d9",
+    "simulated": true,
+    "case_status": "resolved"
+  },
+  "idempotent_replay": true,
+  "frozen_snapshot_preserved": true
+}

@@ -1,0 +1,217 @@
+{
+  "case_id": "U048",
+  "condition": "read_list_offset_negative",
+  "category": "read",
+  "split": "dev",
+  "baseline": "B0",
+  "mode": "deterministic",
+  "evidence_type": "deterministic_structured_form",
+  "initial_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "actual_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "user_turns": [
+    "请处理ORDER-A的refund，金额10.00，数量1。"
+  ],
+  "trace": [
+    {
+      "tool": "list_orders",
+      "args": {
+        "offset": -1
+      },
+      "error": "INVALID_OFFSET",
+      "latency_ms": 0.021
+    }
+  ],
+  "checks": [
+    {
+      "name": "db.refund_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.reship_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.case_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.refunded_cents",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.reshipped_quantity",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.stock",
+      "expected": 5,
+      "actual": 5,
+      "passed": true
+    },
+    {
+      "name": "errors",
+      "expected": [
+        "INVALID_OFFSET"
+      ],
+      "actual": [
+        "INVALID_OFFSET"
+      ],
+      "passed": true
+    },
+    {
+      "name": "tool_names_and_arguments",
+      "expected": [
+        {
+          "tool": "list_orders",
+          "args": {
+            "offset": -1
+          }
+        }
+      ],
+      "actual": [
+        {
+          "tool": "list_orders",
+          "args": {
+            "offset": -1
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "same_customer_preserved",
+      "expected": "customer-a",
+      "actual": "customer-a",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "human_review": false,
+  "security_blocked": false,
+  "model": {
+    "http_calls": 0,
+    "total_tokens": 0,
+    "reported_total_tokens": 0
+  },
+  "rounds": 1,
+  "latency_ms": 267.084,
+  "repetition": 1
+}

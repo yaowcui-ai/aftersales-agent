@@ -1,0 +1,306 @@
+{
+  "case_id": "U097",
+  "condition": "approval_wait_no_effect",
+  "category": "approval",
+  "split": "dev",
+  "baseline": "B1",
+  "mode": "deterministic",
+  "evidence_type": "scripted_mock_model",
+  "initial_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "actual_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [
+        {
+          "action_id": "65ad948d-9788-45a3-8361-968de7565787",
+          "customer_id": "customer-a",
+          "thread_id": "scenario-task",
+          "kind": "refund",
+          "order_id": "ORDER-A",
+          "description": "沙箱售后申请",
+          "amount_cents": 1000,
+          "quantity": 1,
+          "version": 1,
+          "status": "waiting_approval",
+          "result": null,
+          "approver": null,
+          "created_at": "2026-10-28T02:44:08.604346+00:00"
+        }
+      ],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [
+        {
+          "sequence": 1,
+          "event_id": "c8f8bf54-f5d6-4054-9114-1f0bbb3a1100",
+          "action_id": "65ad948d-9788-45a3-8361-968de7565787",
+          "event_type": "prepare",
+          "actor": "customer-a",
+          "details": {
+            "kind": "refund",
+            "order_id": "ORDER-A"
+          },
+          "created_at": "2026-10-28T02:44:08.607344+00:00"
+        }
+      ],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [
+        {
+          "ticket_id": "65ad948d-9788-45a3-8361-968de7565787",
+          "action_id": "65ad948d-9788-45a3-8361-968de7565787",
+          "customer_id": "customer-a",
+          "order_id": "ORDER-A",
+          "kind": "refund",
+          "description": "沙箱售后申请",
+          "status": "waiting_approval",
+          "risk_level": "low",
+          "manual_review": 0,
+          "case_id": null,
+          "created_at": "2026-10-28T02:44:08.609344+00:00",
+          "updated_at": "2026-10-28T02:44:08.609344+00:00"
+        }
+      ],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": "waiting_approval"
+  },
+  "user_turns": [
+    "请处理ORDER-A的refund，金额10.00，数量1。"
+  ],
+  "trace": [
+    {
+      "tool": "prepare_action",
+      "args": {
+        "kind": "refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "amount": "10.00",
+        "quantity": 1
+      },
+      "result": {
+        "action_id": "65ad948d-9788-45a3-8361-968de7565787",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "quantity": 1,
+        "version": 1,
+        "status": "waiting_approval",
+        "result": null,
+        "approver": null,
+        "created_at": "2026-10-28T02:44:08.604346+00:00",
+        "amount": "10.00",
+        "ticket_id": "65ad948d-9788-45a3-8361-968de7565787",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": null,
+        "return_status": null
+      },
+      "latency_ms": 27.779
+    }
+  ],
+  "checks": [
+    {
+      "name": "db.refund_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.reship_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.case_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.refunded_cents",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.reshipped_quantity",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.stock",
+      "expected": 5,
+      "actual": 5,
+      "passed": true
+    },
+    {
+      "name": "db.action_status",
+      "expected": "waiting_approval",
+      "actual": "waiting_approval",
+      "passed": true
+    },
+    {
+      "name": "errors",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "name": "tool_names_and_arguments",
+      "expected": [
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount": "10.00",
+            "quantity": 1
+          }
+        }
+      ],
+      "actual": [
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount": "10.00",
+            "quantity": 1
+          }
+        }
+      ],
+      "passed": true,
+      "scored": false
+    },
+    {
+      "name": "required_tools_and_core_parameters",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "same_customer_preserved",
+      "expected": "customer-a",
+      "actual": "customer-a",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "human_review": false,
+  "security_blocked": false,
+  "model": {
+    "http_calls": 0,
+    "scripted_calls": 1,
+    "model_name": "ScriptedModel",
+    "total_tokens": 0,
+    "reported_total_tokens": 0,
+    "usage": [],
+    "graph_resumed": false,
+    "graph_scope": "B1"
+  },
+  "rounds": 1,
+  "latency_ms": 315.428,
+  "repetition": 1
+}

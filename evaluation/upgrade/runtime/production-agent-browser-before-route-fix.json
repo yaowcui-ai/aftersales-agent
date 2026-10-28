@@ -1,0 +1,195 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/agent-chat.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e",
+        "snapshotDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "actionTimeout": 15000,
+          "baseURL": "http://127.0.0.1:18520",
+          "trace": "off",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36 Edg/156.0.8078.4",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "agent-chat.spec.ts",
+      "file": "agent-chat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real Agent clarifies, prepares, then admin approves and customer restores result",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 24962,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\u001b[22m\n\n    at C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:64:99",
+                    "location": {
+                      "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                      "column": 99,
+                      "line": 64
+                    },
+                    "snippet": "  62 |     await expect(customer.getByText(completed.proposal.result.case_id, { exact: false }).first()).toBeVisible();\n  63 |     await customer.reload();\n> 64 |     await expect(customer.getByText(completed.proposal.result.case_id, { exact: false }).first()).toBeVisible();\n     |                                                                                                   ^\n  65 |     await customer.screenshot({ path: 'test-results/agent-chat/customer-restored.png', fullPage: true });\n  66 |     report.success = true;\n  67 |     report.thread_id = completed.thread_id;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                        "column": 99,
+                        "line": 64
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('c431f25d-44f8-45f3-8372-1fe920e2217c').first()\u001b[22m\n\n\n  62 |     await expect(customer.getByText(completed.proposal.result.case_id, { exact: false }).first()).toBeVisible();\n  63 |     await customer.reload();\n> 64 |     await expect(customer.getByText(completed.proposal.result.case_id, { exact: false }).first()).toBeVisible();\n     |                                                                                                   ^\n  65 |     await customer.screenshot({ path: 'test-results/agent-chat/customer-restored.png', fullPage: true });\n  66 |     report.success = true;\n  67 |     report.thread_id = completed.thread_id;\n    at C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:64:99"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-28T07:29:01.075Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                    "column": 99,
+                    "line": 64
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6e39eaf9cb62a7381bdd-969cbac909a2c00577c7",
+          "file": "agent-chat.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-28T07:29:00.212Z",
+    "duration": 26709.768,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

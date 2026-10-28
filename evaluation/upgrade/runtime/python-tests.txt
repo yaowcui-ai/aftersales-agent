@@ -1,0 +1,22 @@
+........................................................................ [ 48%]
+........................................................................ [ 96%]
+......                                                                   [100%]
+============================== warnings summary ===============================
+tests/delivery/test_agent.py::test_mcp_http_rejects_session_token_and_scopes_execute
+  C:\Users\86139\Documents\ChatGPT\实习项目\aftersales-agent\.venv\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/delivery/test_mcp_protocol.py::test_real_mcp_protocol_context_isolation_and_approval_gate
+tests/delivery/test_mcp_protocol.py::test_real_mcp_protocol_context_isolation_and_approval_gate
+tests/delivery/test_order_listing.py::test_list_orders_mcp_uses_trusted_identity_and_pagination
+tests/delivery/test_order_listing.py::test_list_orders_mcp_uses_trusted_identity_and_pagination
+tests/delivery/test_order_listing.py::test_list_orders_mcp_uses_trusted_identity_and_pagination
+tests/platform/test_fault_recovery.py::test_actual_http500_mcp_response_is_bounded_without_business_effect
+tests/platform/test_fault_recovery.py::test_actual_http500_mcp_response_is_bounded_without_business_effect
+tests/platform/test_fault_recovery.py::test_actual_http500_mcp_response_is_bounded_without_business_effect
+tests/platform/test_transport_errors.py::test_mcp_business_rejection_keeps_error_code_after_session_cleanup
+  C:\Users\86139\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\contextlib.py:105: DeprecationWarning: Use `streamable_http_client` instead.
+    self.gen = func(*args, **kwds)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+150 passed, 10 warnings in 81.72s (0:01:21)

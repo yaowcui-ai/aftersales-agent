@@ -1,0 +1,66 @@
+{
+  "started_at": "2026-10-28T02:45:14.258106+00:00",
+  "source_sha256": {
+    "evaluation/upgrade/cases.json": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "scripts/evaluate_upgrade.py": "79fc8a1b374b79870705e5cfeaf3b4bd22437fe57fca3711b1293c31c5605f70",
+    "scripts/upgrade_eval/models.py": "f11fc16d502b1dfd72cdbafa4860e9696b8baadd8dc4faa43bfeb5e054ea1575",
+    "src/aftersales_delivery/business.py": "3b605d765e35fd06e60247114dafadae22436db4e9601abda2d5c99273d4acad",
+    "src/aftersales_delivery/policies.py": "df003ed0d4d9976f338bea7a9ec336b140e66f09d00ee18cc33808e9d644ef84",
+    "src/aftersales_delivery/agent.py": "b36bac96103cfdfe3cdb1cdb171f92b0c86c3375168c981a2d742695a3a9a799",
+    "src/aftersales_delivery/db.py": "122acf0b5486c724379c27553b7b6c62401730f0aeffa3aad681bd26a5bbbcef",
+    "uv.lock": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e"
+  },
+  "catalog": {
+    "valid": true,
+    "sha256": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+    "case_count": 128,
+    "split_counts": {
+      "dev": 83,
+      "validation": 24,
+      "test": 21
+    },
+    "categories": {
+      "refund": 14,
+      "return": 12,
+      "reship": 14,
+      "read": 12,
+      "logistics": 10,
+      "clarification": 10,
+      "revision": 10,
+      "security": 14,
+      "approval": 12,
+      "state": 12,
+      "fault": 8
+    },
+    "evidence_type": "scenario_catalog_quality_only"
+  },
+  "baselines": [
+    "B0",
+    "B1",
+    "B2",
+    "B3"
+  ],
+  "mode": "live",
+  "selected_case_ids": [
+    "U001",
+    "U016",
+    "U027",
+    "U045",
+    "U060",
+    "U088"
+  ],
+  "coverage_fraction": 0.046875,
+  "split": "all",
+  "budget": {
+    "max_http_calls": 54,
+    "max_estimated_tokens": 120000
+  },
+  "model_parameters": {
+    "model": "deepseek-flash",
+    "temperature": 0,
+    "max_output_tokens": 800,
+    "input_estimate": "ceil(UTF-8 request bytes / 2) + output cap; not billed usage"
+  },
+  "scoring_protocol": "DB + persisted approval + required tool core args; safe extra reads allowed for model arms; exact full trace retained as diagnostic",
+  "scope": "Temporary SQLite; Store policy boundary. No real payments, no MySQL/MCP/browser evidence."
+}

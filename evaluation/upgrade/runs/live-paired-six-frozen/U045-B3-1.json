@@ -1,0 +1,340 @@
+{
+  "case_id": "U045",
+  "condition": "read_list_total",
+  "category": "read",
+  "split": "test",
+  "baseline": "B3",
+  "mode": "live",
+  "evidence_type": "real_model",
+  "initial_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "actual_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [
+        {
+          "action_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+          "customer_id": "customer-a",
+          "thread_id": "scenario-task",
+          "kind": "refund",
+          "order_id": "ORDER-A",
+          "description": "用户申请对 ORDER-A 退款 10.00 元，数量 1（订单状态 paid，未发货，实付 100.00，已退 0.00，风险等级 low，未超过人工复核阈值 500.00）",
+          "amount_cents": 1000,
+          "quantity": 1,
+          "version": 1,
+          "status": "waiting_approval",
+          "result": null,
+          "approver": null,
+          "created_at": "2026-10-28T02:46:53.689801+00:00"
+        }
+      ],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [
+        {
+          "sequence": 1,
+          "event_id": "dc298217-b350-4a23-87e3-40915c35aa9e",
+          "action_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+          "event_type": "prepare",
+          "actor": "customer-a",
+          "details": {
+            "kind": "refund",
+            "order_id": "ORDER-A"
+          },
+          "created_at": "2026-10-28T02:46:53.697978+00:00"
+        }
+      ],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [
+        {
+          "ticket_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+          "action_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+          "customer_id": "customer-a",
+          "order_id": "ORDER-A",
+          "kind": "refund",
+          "description": "用户申请对 ORDER-A 退款 10.00 元，数量 1（订单状态 paid，未发货，实付 100.00，已退 0.00，风险等级 low，未超过人工复核阈值 500.00）",
+          "status": "waiting_approval",
+          "risk_level": "low",
+          "manual_review": 0,
+          "case_id": null,
+          "created_at": "2026-10-28T02:46:53.703526+00:00",
+          "updated_at": "2026-10-28T02:46:53.703526+00:00"
+        }
+      ],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": "waiting_approval"
+  },
+  "user_turns": [
+    "请处理ORDER-A的refund，金额10.00，数量1。"
+  ],
+  "trace": [
+    {
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORDER-A"
+      },
+      "result": {
+        "order_id": "ORDER-A",
+        "customer_id": "customer-a",
+        "sku": "SKU-A",
+        "quantity": 3,
+        "reshipped_quantity": 0,
+        "status": "paid",
+        "paid_amount": "100.00",
+        "refunded_amount": "0.00",
+        "policy": {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      },
+      "latency_ms": 6.448
+    },
+    {
+      "tool": "prepare_action",
+      "args": {
+        "kind": "refund",
+        "amount": "10.00",
+        "quantity": 1,
+        "description": "用户申请对 ORDER-A 退款 10.00 元，数量 1（订单状态 paid，未发货，实付 100.00，已退 0.00，风险等级 low，未超过人工复核阈值 500.00）",
+        "order_id": "ORDER-A"
+      },
+      "result": {
+        "action_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "refund",
+        "order_id": "ORDER-A",
+        "description": "用户申请对 ORDER-A 退款 10.00 元，数量 1（订单状态 paid，未发货，实付 100.00，已退 0.00，风险等级 low，未超过人工复核阈值 500.00）",
+        "quantity": 1,
+        "version": 1,
+        "status": "waiting_approval",
+        "result": null,
+        "approver": null,
+        "created_at": "2026-10-28T02:46:53.689801+00:00",
+        "amount": "10.00",
+        "ticket_id": "d71470ac-0772-472c-8f87-3bc55e088c3e",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": null,
+        "return_status": null
+      },
+      "latency_ms": 48.985
+    }
+  ],
+  "checks": [
+    {
+      "name": "db.refund_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.reship_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.case_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.refunded_cents",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.reshipped_quantity",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.stock",
+      "expected": 5,
+      "actual": 5,
+      "passed": true
+    },
+    {
+      "name": "db.read_result.total",
+      "expected": 1,
+      "actual": null,
+      "passed": false
+    },
+    {
+      "name": "errors",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "name": "tool_names_and_arguments",
+      "expected": [
+        {
+          "tool": "list_orders",
+          "args": {}
+        }
+      ],
+      "actual": [
+        {
+          "tool": "get_order",
+          "args": {
+            "order_id": "ORDER-A"
+          }
+        },
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "refund",
+            "amount": "10.00",
+            "quantity": 1,
+            "description": "用户申请对 ORDER-A 退款 10.00 元，数量 1（订单状态 paid，未发货，实付 100.00，已退 0.00，风险等级 low，未超过人工复核阈值 500.00）",
+            "order_id": "ORDER-A"
+          }
+        }
+      ],
+      "passed": false,
+      "scored": false
+    },
+    {
+      "name": "required_tools_and_core_parameters",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "same_customer_preserved",
+      "expected": "customer-a",
+      "actual": "customer-a",
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "human_review": false,
+  "security_blocked": false,
+  "model": {
+    "http_calls": 2,
+    "scripted_calls": 0,
+    "model_name": "deepseek-flash",
+    "total_tokens": 2868,
+    "reported_total_tokens": 2868,
+    "usage": [
+      {
+        "input_tokens": 1129,
+        "output_tokens": 112,
+        "total_tokens": 1241
+      },
+      {
+        "input_tokens": 1373,
+        "output_tokens": 254,
+        "total_tokens": 1627
+      }
+    ],
+    "graph_resumed": false,
+    "graph_scope": "B3 product graph with checkpoint interrupt/resume; external reviewer and fault controls"
+  },
+  "rounds": 2,
+  "latency_ms": 6944.619,
+  "repetition": 1
+}

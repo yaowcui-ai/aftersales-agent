@@ -1,0 +1,195 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "e2e/agent-chat.spec.ts",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\playwright.config.ts",
+    "rootDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/86139/Documents/ChatGPT/实习项目/aftersales-agent-upgrade/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e",
+        "snapshotDir": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 60000,
+        "use": {
+          "actionTimeout": 15000,
+          "baseURL": "http://127.0.0.1:18520",
+          "trace": "off",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36 Edg/156.0.8078.4",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "channel": "msedge"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "agent-chat.spec.ts",
+      "file": "agent-chat.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real Agent clarifies, prepares, then admin approves and customer restores result",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16026,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '登录工作台', exact: true })\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '登录工作台', exact: true })\u001b[22m\n\n    at login (C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:19:68)\n    at C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:31:5",
+                    "location": {
+                      "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                      "column": 68,
+                      "line": 19
+                    },
+                    "snippet": "  17 |     await page.getByLabel('用户名').fill(process.env[role === 'admin' ? 'E2E_ADMIN_USERNAME' : 'E2E_CUSTOMER_USERNAME']!);\n  18 |     await page.getByLabel('密码', { exact: true }).fill(process.env[role === 'admin' ? 'E2E_ADMIN_PASSWORD' : 'E2E_CUSTOMER_PASSWORD']!);\n> 19 |     await page.getByRole('button', { name: '登录工作台', exact: true }).click();\n     |                                                                    ^\n  20 |     await expect(page.getByRole('heading', { name: role === 'admin' ? '服务运营总览' : '我的订单', exact: true })).toBeVisible();\n  21 |   }\n  22 |   async function send(message: string) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                        "column": 68,
+                        "line": 19
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '登录工作台', exact: true })\u001b[22m\n\n\n  17 |     await page.getByLabel('用户名').fill(process.env[role === 'admin' ? 'E2E_ADMIN_USERNAME' : 'E2E_CUSTOMER_USERNAME']!);\n  18 |     await page.getByLabel('密码', { exact: true }).fill(process.env[role === 'admin' ? 'E2E_ADMIN_PASSWORD' : 'E2E_CUSTOMER_PASSWORD']!);\n> 19 |     await page.getByRole('button', { name: '登录工作台', exact: true }).click();\n     |                                                                    ^\n  20 |     await expect(page.getByRole('heading', { name: role === 'admin' ? '服务运营总览' : '我的订单', exact: true })).toBeVisible();\n  21 |   }\n  22 |   async function send(message: string) {\n    at login (C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:19:68)\n    at C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts:31:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-28T07:26:14.176Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\test-failed-2.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\test-results\\agent-chat-real-Agent-clar-da9c4-nd-customer-restores-result\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\86139\\Documents\\ChatGPT\\实习项目\\aftersales-agent-upgrade\\frontend\\e2e\\agent-chat.spec.ts",
+                    "column": 68,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6e39eaf9cb62a7381bdd-969cbac909a2c00577c7",
+          "file": "agent-chat.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-28T07:26:13.467Z",
+    "duration": 17607.712,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

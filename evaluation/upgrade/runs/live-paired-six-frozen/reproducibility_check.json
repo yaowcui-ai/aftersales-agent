@@ -1,0 +1,46 @@
+{
+  "source_unchanged": true,
+  "files": {
+    "evaluation/upgrade/cases.json": {
+      "initial_sha256": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+      "completion_sha256": "e7c0fa2c79990b243ba7ebb1936428e60cab40de30aabbdfa3fb06a56ce4c465",
+      "unchanged": true
+    },
+    "scripts/evaluate_upgrade.py": {
+      "initial_sha256": "79fc8a1b374b79870705e5cfeaf3b4bd22437fe57fca3711b1293c31c5605f70",
+      "completion_sha256": "79fc8a1b374b79870705e5cfeaf3b4bd22437fe57fca3711b1293c31c5605f70",
+      "unchanged": true
+    },
+    "scripts/upgrade_eval/models.py": {
+      "initial_sha256": "f11fc16d502b1dfd72cdbafa4860e9696b8baadd8dc4faa43bfeb5e054ea1575",
+      "completion_sha256": "f11fc16d502b1dfd72cdbafa4860e9696b8baadd8dc4faa43bfeb5e054ea1575",
+      "unchanged": true
+    },
+    "src/aftersales_delivery/business.py": {
+      "initial_sha256": "3b605d765e35fd06e60247114dafadae22436db4e9601abda2d5c99273d4acad",
+      "completion_sha256": "3b605d765e35fd06e60247114dafadae22436db4e9601abda2d5c99273d4acad",
+      "unchanged": true
+    },
+    "src/aftersales_delivery/policies.py": {
+      "initial_sha256": "df003ed0d4d9976f338bea7a9ec336b140e66f09d00ee18cc33808e9d644ef84",
+      "completion_sha256": "df003ed0d4d9976f338bea7a9ec336b140e66f09d00ee18cc33808e9d644ef84",
+      "unchanged": true
+    },
+    "src/aftersales_delivery/agent.py": {
+      "initial_sha256": "b36bac96103cfdfe3cdb1cdb171f92b0c86c3375168c981a2d742695a3a9a799",
+      "completion_sha256": "b36bac96103cfdfe3cdb1cdb171f92b0c86c3375168c981a2d742695a3a9a799",
+      "unchanged": true
+    },
+    "src/aftersales_delivery/db.py": {
+      "initial_sha256": "122acf0b5486c724379c27553b7b6c62401730f0aeffa3aad681bd26a5bbbcef",
+      "completion_sha256": "122acf0b5486c724379c27553b7b6c62401730f0aeffa3aad681bd26a5bbbcef",
+      "unchanged": true
+    },
+    "uv.lock": {
+      "initial_sha256": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e",
+      "completion_sha256": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e",
+      "unchanged": true
+    }
+  },
+  "excluded_transport": "Direct HTTP model + local Store, no transport.py/MCP executed; this is not HTTP MCP evidence."
+}

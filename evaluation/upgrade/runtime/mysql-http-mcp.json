@@ -1,0 +1,45 @@
+{
+  "run_id": "VERIFY-f8046be623ed",
+  "time_utc": "2026-10-28T02:53:04.497349+00:00",
+  "backend": "mysql",
+  "transport": "real Streamable HTTP",
+  "model_calls": 0,
+  "checks": [
+    {
+      "name": "same_action_concurrent_replay",
+      "passed": true,
+      "action_id": "d2313f7b-aa10-40ce-a78e-7bec92b462e0"
+    },
+    {
+      "name": "cross_action_refund_limit_race",
+      "passed": true,
+      "order_id": "VERIFY-f8046be623ed-LIMIT"
+    },
+    {
+      "name": "shared_stock_race_no_oversell",
+      "passed": true,
+      "sku": "VERIFY-f8046be623ed-SHARED"
+    },
+    {
+      "name": "return_receipt_exactly_once",
+      "passed": true,
+      "action_id": "3211fd4c-fadb-4944-8fb3-04d1f9a78fcc"
+    },
+    {
+      "name": "commit_response_loss_pool_reconnect",
+      "passed": true,
+      "action_id": "6081d45f-64be-4ba3-8f51-5e039457b016"
+    },
+    {
+      "name": "independent_http_mcp_customer_isolation",
+      "passed": true
+    },
+    {
+      "name": "mcp_scope_and_approval_enforced",
+      "passed": true
+    }
+  ],
+  "passed": 7,
+  "total": 7,
+  "success": true
+}

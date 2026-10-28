@@ -1,0 +1,283 @@
+{
+  "case_id": "U060",
+  "condition": "logistics_inquiry_ticket",
+  "category": "logistics",
+  "split": "dev",
+  "baseline": "B3",
+  "mode": "live",
+  "evidence_type": "real_model",
+  "initial_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "actual_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "paid"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "paid"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "user_turns": [
+    "请处理ORDER-A的logistics，金额10.00，数量1。"
+  ],
+  "trace": [
+    {
+      "tool": "get_order",
+      "args": {
+        "order_id": "ORDER-A"
+      },
+      "result": {
+        "order_id": "ORDER-A",
+        "customer_id": "customer-a",
+        "sku": "SKU-A",
+        "quantity": 3,
+        "reshipped_quantity": 0,
+        "status": "paid",
+        "paid_amount": "100.00",
+        "refunded_amount": "0.00",
+        "policy": {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      },
+      "latency_ms": 9.423
+    },
+    {
+      "tool": "get_shipments",
+      "args": {
+        "order_id": "ORDER-A"
+      },
+      "result": [],
+      "latency_ms": 5.271
+    }
+  ],
+  "checks": [
+    {
+      "name": "db.refund_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.reship_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.case_count",
+      "expected": 1,
+      "actual": 0,
+      "passed": false
+    },
+    {
+      "name": "db.order.refunded_cents",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.order.reshipped_quantity",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.stock",
+      "expected": 5,
+      "actual": 5,
+      "passed": true
+    },
+    {
+      "name": "db.action_status",
+      "expected": "completed",
+      "actual": null,
+      "passed": false
+    },
+    {
+      "name": "errors",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "name": "tool_names_and_arguments",
+      "expected": [
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "logistics",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount": null,
+            "quantity": 1
+          }
+        },
+        {
+          "tool": "approve",
+          "args": {}
+        },
+        {
+          "tool": "execute",
+          "args": {}
+        }
+      ],
+      "actual": [
+        {
+          "tool": "get_order",
+          "args": {
+            "order_id": "ORDER-A"
+          }
+        },
+        {
+          "tool": "get_shipments",
+          "args": {
+            "order_id": "ORDER-A"
+          }
+        }
+      ],
+      "passed": false,
+      "scored": false
+    },
+    {
+      "name": "required_tools_and_core_parameters",
+      "expected": true,
+      "actual": false,
+      "passed": false
+    },
+    {
+      "name": "same_customer_preserved",
+      "expected": "customer-a",
+      "actual": "customer-a",
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "human_review": false,
+  "security_blocked": false,
+  "model": {
+    "http_calls": 2,
+    "scripted_calls": 0,
+    "model_name": "deepseek-flash",
+    "total_tokens": 3481,
+    "reported_total_tokens": 3481,
+    "usage": [
+      {
+        "input_tokens": 1129,
+        "output_tokens": 141,
+        "total_tokens": 1270
+      },
+      {
+        "input_tokens": 1411,
+        "output_tokens": 800,
+        "total_tokens": 2211
+      }
+    ],
+    "graph_resumed": false,
+    "graph_scope": "B3 product graph with checkpoint interrupt/resume; external reviewer and fault controls"
+  },
+  "rounds": 2,
+  "latency_ms": 10622.522,
+  "repetition": 1
+}

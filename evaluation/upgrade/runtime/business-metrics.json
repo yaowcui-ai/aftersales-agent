@@ -1,0 +1,45 @@
+{
+  "scope": "Four matched sandbox application conditions; B0 has prefilled inputs, no real-user efficiency claim.",
+  "groups": {
+    "B0": {
+      "conditions": 4,
+      "passed": 4,
+      "mandatory_fields_collected": 4,
+      "approval_actions_observed": 4,
+      "mean_scripted_user_messages": 1,
+      "mean_automated_pipeline_ms": 503.411,
+      "high_risk_sample_count": 0,
+      "high_risk_block_rate": null
+    },
+    "B1": {
+      "conditions": 4,
+      "passed": 0,
+      "mandatory_fields_collected": 0,
+      "approval_actions_observed": 0,
+      "mean_scripted_user_messages": 1,
+      "mean_automated_pipeline_ms": 4610.628,
+      "high_risk_sample_count": 0,
+      "high_risk_block_rate": null
+    },
+    "B2": {
+      "conditions": 4,
+      "passed": 4,
+      "mandatory_fields_collected": 4,
+      "approval_actions_observed": 4,
+      "mean_scripted_user_messages": 1,
+      "mean_automated_pipeline_ms": 9753.475,
+      "high_risk_sample_count": 0,
+      "high_risk_block_rate": null
+    },
+    "B3": {
+      "conditions": 4,
+      "passed": 3,
+      "mandatory_fields_collected": 3,
+      "approval_actions_observed": 3,
+      "mean_scripted_user_messages": 1,
+      "mean_automated_pipeline_ms": 11772.455249999999,
+      "high_risk_sample_count": 0,
+      "high_risk_block_rate": null
+    }
+  }
+}

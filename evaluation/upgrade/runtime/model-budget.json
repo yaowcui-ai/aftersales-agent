@@ -1,0 +1,41 @@
+{
+  "budget_target": {
+    "application_attempts": 60,
+    "tokens": 120000
+  },
+  "records": [
+    {
+      "scope": "frozen_v1_model_comparison",
+      "confirmed_http_calls": 37,
+      "application_calls": 37,
+      "tokens": 54790
+    },
+    {
+      "scope": "agent_chat_before_route_fix",
+      "confirmed_http_calls": null,
+      "application_calls": 5,
+      "tokens": 10833
+    },
+    {
+      "scope": "agent_chat_after_route_fix",
+      "confirmed_http_calls": null,
+      "application_calls": 4,
+      "tokens": 4210
+    },
+    {
+      "scope": "real_browser_form_refund_and_return",
+      "confirmed_http_calls": null,
+      "application_calls": 2,
+      "tokens": 509
+    },
+    {
+      "scope": "real_docker_restart_final_reply",
+      "confirmed_http_calls": null,
+      "application_calls": 1,
+      "tokens": 234
+    }
+  ],
+  "observed_application_calls": 49,
+  "observed_tokens": 70576,
+  "scope_note": "37 HTTP attempts counted directly in experimental ledger. Product application metrics exclude unobserved SDK-internal HTTP retries; no claim that every provider HTTP attempt is measured."
+}

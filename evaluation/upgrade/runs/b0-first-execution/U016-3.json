@@ -1,0 +1,589 @@
+{
+  "case_id": "U016",
+  "condition": "return_delivered_admin_receive",
+  "category": "return",
+  "split": "dev",
+  "baseline": "B0",
+  "mode": "deterministic",
+  "evidence_type": "deterministic_structured_form",
+  "initial_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 0,
+      "reshipped_quantity": 0,
+      "status": "delivered"
+    },
+    "stock": 5,
+    "refund_count": 0,
+    "reship_count": 0,
+    "case_count": 0,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 0,
+          "reshipped_quantity": 0,
+          "status": "delivered"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [],
+      "cases": [],
+      "refunds": [],
+      "reships": [],
+      "events": [],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [],
+      "approval_reviews": [],
+      "task_index": []
+    },
+    "action_status": null
+  },
+  "actual_db": {
+    "order": {
+      "order_id": "ORDER-A",
+      "customer_id": "customer-a",
+      "sku": "SKU-A",
+      "quantity": 3,
+      "paid_cents": 10000,
+      "refunded_cents": 1000,
+      "reshipped_quantity": 0,
+      "status": "delivered"
+    },
+    "stock": 5,
+    "refund_count": 1,
+    "reship_count": 0,
+    "case_count": 1,
+    "tables": {
+      "orders": [
+        {
+          "order_id": "ORDER-A",
+          "customer_id": "customer-a",
+          "sku": "SKU-A",
+          "quantity": 3,
+          "paid_cents": 10000,
+          "refunded_cents": 1000,
+          "reshipped_quantity": 0,
+          "status": "delivered"
+        }
+      ],
+      "inventory": [
+        {
+          "sku": "SKU-A",
+          "available": 5
+        }
+      ],
+      "shipments": [],
+      "actions": [
+        {
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "customer_id": "customer-a",
+          "thread_id": "scenario-task",
+          "kind": "return_refund",
+          "order_id": "ORDER-A",
+          "description": "沙箱售后申请",
+          "amount_cents": 1000,
+          "quantity": 1,
+          "version": 1,
+          "status": "completed",
+          "result": {
+            "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "simulated": true,
+            "refund_id": "c61dd7e0-9566-4489-b51e-93baaed05650",
+            "amount": "10.00",
+            "case_status": "resolved",
+            "received_by": "reviewer",
+            "received_at": "2026-10-28T02:37:48.116348+00:00"
+          },
+          "approver": "reviewer",
+          "created_at": "2026-10-28T02:37:48.019254+00:00"
+        }
+      ],
+      "cases": [
+        {
+          "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "customer_id": "customer-a",
+          "order_id": "ORDER-A",
+          "kind": "return_refund",
+          "description": "沙箱售后申请",
+          "status": "resolved",
+          "resolution": "模拟退货收货及退款已完成",
+          "created_at": "2026-10-28T02:37:48.079774+00:00",
+          "updated_at": "2026-10-28T02:37:48.109347+00:00"
+        }
+      ],
+      "refunds": [
+        {
+          "refund_id": "c61dd7e0-9566-4489-b51e-93baaed05650",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "order_id": "ORDER-A",
+          "amount_cents": 1000,
+          "created_at": "2026-10-28T02:37:48.109347+00:00"
+        }
+      ],
+      "reships": [],
+      "events": [
+        {
+          "sequence": 1,
+          "event_id": "f35e5d21-5518-4aeb-b7fa-dad79180012d",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "event_type": "prepare",
+          "actor": "customer-a",
+          "details": {
+            "kind": "return_refund",
+            "order_id": "ORDER-A"
+          },
+          "created_at": "2026-10-28T02:37:48.021614+00:00"
+        },
+        {
+          "sequence": 2,
+          "event_id": "18e7e65d-de94-4a61-aff1-c67708b8b7a3",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "event_type": "decision",
+          "actor": "reviewer",
+          "details": {
+            "approved": true,
+            "version": 1,
+            "reason": "隔离评测核验",
+            "snapshot_hash": "c9cfa5f12bb3a3579f5271b09afc39cec9db1ea864ced598500ee13771a2f6f7",
+            "object_id": "ORDER-A"
+          },
+          "created_at": "2026-10-28T02:37:48.062800+00:00"
+        },
+        {
+          "sequence": 3,
+          "event_id": "2ebc9437-f328-439e-a705-29a3900fd332",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "event_type": "execute",
+          "actor": "reviewer",
+          "details": {
+            "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "simulated": true,
+            "case_status": "awaiting_return"
+          },
+          "created_at": "2026-10-28T02:37:48.085774+00:00"
+        },
+        {
+          "sequence": 4,
+          "event_id": "cf8332d1-4edc-4686-a46c-870a6a13634e",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "event_type": "return_receive",
+          "actor": "reviewer",
+          "details": {
+            "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "simulated": true,
+            "refund_id": "c61dd7e0-9566-4489-b51e-93baaed05650",
+            "amount": "10.00",
+            "case_status": "resolved",
+            "received_by": "reviewer",
+            "received_at": "2026-10-28T02:37:48.116348+00:00"
+          },
+          "created_at": "2026-10-28T02:37:48.119346+00:00"
+        }
+      ],
+      "order_policies": [
+        {
+          "order_id": "ORDER-A",
+          "aftersales_until": "2099-01-01T00:00:00+00:00",
+          "risk_level": "low",
+          "manual_review_threshold_cents": 50000
+        }
+      ],
+      "user_profiles": [],
+      "tickets": [
+        {
+          "ticket_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "customer_id": "customer-a",
+          "order_id": "ORDER-A",
+          "kind": "return_refund",
+          "description": "沙箱售后申请",
+          "status": "resolved",
+          "risk_level": "low",
+          "manual_review": 0,
+          "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+          "created_at": "2026-10-28T02:37:48.022315+00:00",
+          "updated_at": "2026-10-28T02:37:48.118346+00:00"
+        }
+      ],
+      "approval_reviews": [
+        {
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "object_type": "order",
+          "object_id": "ORDER-A",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "隔离评测核验",
+          "snapshot": {
+            "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+            "customer_id": "customer-a",
+            "thread_id": "scenario-task",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount_cents": 1000,
+            "quantity": 1,
+            "version": 1,
+            "created_at": "2026-10-28T02:37:48.019254+00:00",
+            "sku": "SKU-A"
+          },
+          "snapshot_hash": "c9cfa5f12bb3a3579f5271b09afc39cec9db1ea864ced598500ee13771a2f6f7",
+          "created_at": "2026-10-28T02:37:48.060377+00:00"
+        }
+      ],
+      "task_index": []
+    },
+    "action_status": "completed"
+  },
+  "user_turns": [
+    "请处理ORDER-A的return_refund，金额10.00，数量1。"
+  ],
+  "trace": [
+    {
+      "tool": "prepare_action",
+      "args": {
+        "kind": "return_refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "amount": "10.00",
+        "quantity": 1
+      },
+      "result": {
+        "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "return_refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "quantity": 1,
+        "version": 1,
+        "status": "waiting_approval",
+        "result": null,
+        "approver": null,
+        "created_at": "2026-10-28T02:37:48.019254+00:00",
+        "amount": "10.00",
+        "ticket_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": null,
+        "return_status": "waiting_approval"
+      },
+      "latency_ms": 42.106
+    },
+    {
+      "tool": "approve",
+      "args": {},
+      "result": {
+        "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "return_refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "quantity": 1,
+        "version": 1,
+        "status": "approved",
+        "result": null,
+        "approver": "reviewer",
+        "created_at": "2026-10-28T02:37:48.019254+00:00",
+        "amount": "10.00",
+        "ticket_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": {
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "object_type": "order",
+          "object_id": "ORDER-A",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "隔离评测核验",
+          "snapshot": {
+            "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+            "customer_id": "customer-a",
+            "thread_id": "scenario-task",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount_cents": 1000,
+            "quantity": 1,
+            "version": 1,
+            "created_at": "2026-10-28T02:37:48.019254+00:00",
+            "sku": "SKU-A"
+          },
+          "snapshot_hash": "c9cfa5f12bb3a3579f5271b09afc39cec9db1ea864ced598500ee13771a2f6f7",
+          "created_at": "2026-10-28T02:37:48.060377+00:00"
+        },
+        "return_status": "approved"
+      },
+      "latency_ms": 16.962
+    },
+    {
+      "tool": "execute",
+      "args": {},
+      "result": {
+        "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "return_refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "quantity": 1,
+        "version": 1,
+        "status": "awaiting_return",
+        "result": {
+          "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+          "kind": "return_refund",
+          "order_id": "ORDER-A",
+          "simulated": true,
+          "case_status": "awaiting_return"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-28T02:37:48.019254+00:00",
+        "amount": "10.00",
+        "ticket_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": {
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "object_type": "order",
+          "object_id": "ORDER-A",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "隔离评测核验",
+          "snapshot": {
+            "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+            "customer_id": "customer-a",
+            "thread_id": "scenario-task",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount_cents": 1000,
+            "quantity": 1,
+            "version": 1,
+            "created_at": "2026-10-28T02:37:48.019254+00:00",
+            "sku": "SKU-A"
+          },
+          "snapshot_hash": "c9cfa5f12bb3a3579f5271b09afc39cec9db1ea864ced598500ee13771a2f6f7",
+          "created_at": "2026-10-28T02:37:48.060377+00:00"
+        },
+        "return_status": "awaiting_return"
+      },
+      "latency_ms": 23.449
+    },
+    {
+      "tool": "receive_return",
+      "args": {},
+      "result": {
+        "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "customer_id": "customer-a",
+        "thread_id": "scenario-task",
+        "kind": "return_refund",
+        "order_id": "ORDER-A",
+        "description": "沙箱售后申请",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "case_id": "ff389bc3-8414-4972-80b6-410b4a4cc217",
+          "kind": "return_refund",
+          "order_id": "ORDER-A",
+          "simulated": true,
+          "refund_id": "c61dd7e0-9566-4489-b51e-93baaed05650",
+          "amount": "10.00",
+          "case_status": "resolved",
+          "received_by": "reviewer",
+          "received_at": "2026-10-28T02:37:48.116348+00:00"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-28T02:37:48.019254+00:00",
+        "amount": "10.00",
+        "ticket_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": {
+          "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+          "object_type": "order",
+          "object_id": "ORDER-A",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "隔离评测核验",
+          "snapshot": {
+            "action_id": "63694af3-4106-4e29-b865-0fcd13406d04",
+            "customer_id": "customer-a",
+            "thread_id": "scenario-task",
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount_cents": 1000,
+            "quantity": 1,
+            "version": 1,
+            "created_at": "2026-10-28T02:37:48.019254+00:00",
+            "sku": "SKU-A"
+          },
+          "snapshot_hash": "c9cfa5f12bb3a3579f5271b09afc39cec9db1ea864ced598500ee13771a2f6f7",
+          "created_at": "2026-10-28T02:37:48.060377+00:00"
+        },
+        "return_status": "completed"
+      },
+      "latency_ms": 36.681
+    }
+  ],
+  "checks": [
+    {
+      "name": "db.refund_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    },
+    {
+      "name": "db.reship_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.case_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    },
+    {
+      "name": "db.order.refunded_cents",
+      "expected": 1000,
+      "actual": 1000,
+      "passed": true
+    },
+    {
+      "name": "db.order.reshipped_quantity",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "name": "db.stock",
+      "expected": 5,
+      "actual": 5,
+      "passed": true
+    },
+    {
+      "name": "db.action_status",
+      "expected": "completed",
+      "actual": "completed",
+      "passed": true
+    },
+    {
+      "name": "errors",
+      "expected": [],
+      "actual": [],
+      "passed": true
+    },
+    {
+      "name": "tool_names_and_arguments",
+      "expected": [
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount": "10.00",
+            "quantity": 1
+          }
+        },
+        {
+          "tool": "approve",
+          "args": {}
+        },
+        {
+          "tool": "execute",
+          "args": {}
+        },
+        {
+          "tool": "receive_return",
+          "args": {}
+        }
+      ],
+      "actual": [
+        {
+          "tool": "prepare_action",
+          "args": {
+            "kind": "return_refund",
+            "order_id": "ORDER-A",
+            "description": "沙箱售后申请",
+            "amount": "10.00",
+            "quantity": 1
+          }
+        },
+        {
+          "tool": "approve",
+          "args": {}
+        },
+        {
+          "tool": "execute",
+          "args": {}
+        },
+        {
+          "tool": "receive_return",
+          "args": {}
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "approval_before_effect.63694af3-4106-4e29-b865-0fcd13406d04",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "name": "same_customer_preserved",
+      "expected": "customer-a",
+      "actual": "customer-a",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "human_review": false,
+  "security_blocked": false,
+  "model": {
+    "http_calls": 0,
+    "total_tokens": 0,
+    "reported_total_tokens": 0
+  },
+  "rounds": 1,
+  "latency_ms": 562.602,
+  "repetition": 3
+}
