@@ -1,0 +1,12 @@
+ARG BASE_IMAGE=python:3.12-slim
+FROM ${BASE_IMAGE}
+WORKDIR /app
+ENV UV_PROJECT_ENVIRONMENT=/usr/local PYTHONPATH=/app/src PYTHONUNBUFFERED=1
+COPY pyproject.toml uv.lock ./
+RUN python -c "import fastapi,asyncmy,langgraph,mcp" || (pip install --no-cache-dir uv==0.12.5 && uv sync --frozen --no-install-project --no-dev)
+COPY src/ ./src/
+COPY scripts/setup_delivery.py scripts/fresh_platform_sandbox.py scripts/verify_platform_mysql.py ./scripts/
+COPY scripts/serve_frontend.py ./scripts/serve_frontend.py
+COPY LICENSE ./LICENSE
+RUN mkdir -p /app/output/delivery
+CMD ["python", "-m", "uvicorn", "aftersales_delivery.api:app", "--host", "0.0.0.0", "--port", "8090", "--workers", "1"]

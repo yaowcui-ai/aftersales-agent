@@ -1,0 +1,81 @@
+name: aftersales-upgrade
+x-app: &app
+  image: aftersales-platform:local
+  build:
+    context: .
+    dockerfile: docker/Dockerfile.platform
+  env_file: [.env, .env.delivery]
+  environment: &environment
+    PYTHONPATH: /app/src
+    MYSQL_HOST: mysql
+    MYSQL_PORT: "3306"
+    MYSQL_USER: root
+    MYSQL_PASSWORD: ${DELIVERY_MYSQL_PASSWORD:?Configure delivery credentials first}
+    MYSQL_CHECKPOINT_DB: aftersales_agent_checkpoints
+    DELIVERY_DB_URL: ""
+    DELIVERY_CHECKPOINT_BACKEND: mysql
+    DELIVERY_CONTAINER: "1"
+    DELIVERY_PLATFORM_ENABLED: "1"
+    DELIVERY_MCP_URL: http://mcp:8091/mcp
+  restart: unless-stopped
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DELIVERY_MYSQL_PASSWORD:?Configure credentials}
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - platform_mysql:/var/lib/mysql
+      - ./docker/delivery-init.sql:/docker-entrypoint-initdb.d/01-delivery.sql:ro
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_ROOT_PASSWORD" mysql -h 127.0.0.1 -uroot -Nse "SELECT 1" >/dev/null 2>&1']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+  init:
+    <<: *app
+    command: [python, scripts/setup_delivery.py, --schema-only]
+    depends_on:
+      mysql: {condition: service_healthy}
+    restart: "no"
+  mcp:
+    <<: *app
+    command: [python, -m, uvicorn, 'aftersales_delivery.mcp_server:app', --host, 0.0.0.0, --port, '8091', --workers, '1']
+    depends_on:
+      init: {condition: service_completed_successfully}
+    ports: ['127.0.0.1:18101:8091']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8091/health',timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  api:
+    <<: *app
+    depends_on:
+      mcp: {condition: service_healthy}
+    ports: ['127.0.0.1:18100:8090']
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health',timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  web:
+    image: aftersales-react:local
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.react
+    environment:
+      FRONTEND_API: http://api:8090
+    depends_on:
+      api: {condition: service_healthy}
+    ports: ['127.0.0.1:18520:8080']
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  platform_mysql:

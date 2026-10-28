@@ -16,3 +16,10 @@ venv
 .venv
 *.db
 privatecredentials/*
+**/node_modules
+frontend/dist
+frontend/test-results
+frontend/evidence
+frontend/playwright-report
+**/.env
+**/.env.*
