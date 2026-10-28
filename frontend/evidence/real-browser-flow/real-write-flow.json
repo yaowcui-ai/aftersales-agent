@@ -1,0 +1,303 @@
+{
+  "at": "2026-10-28T02:55:09.571Z",
+  "business": "simulated",
+  "summary": [
+    {
+      "phase": "approve_http",
+      "kind": "refund",
+      "status": 200,
+      "response": {
+        "thread_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+        "customer_id": "learner-001",
+        "status": "completed",
+        "messages": [
+          {
+            "type": "human",
+            "content": "表单申请：{\"request_id\": \"req-57b2b8c7-e9dc-45db-8d32-59317436719e\", \"kind\": \"refund\", \"order_id\": \"UP-PAID\", \"description\": \"Edge-refund-1793155523693：独立沙箱浏览器验收，仅模拟退款1元。\", \"amount\": \"1.00\", \"quantity\": 1}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "工单 f1327572-3e46-4f4b-9a1a-a432bb552a32（订单 UP-PAID）的退款模拟业务已处理，退款单号 b795b6cd-9a54-496f-a721-c306e6a35175，金额 1.00，工单状态为已解决。",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+          "customer_id": "learner-001",
+          "thread_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+          "kind": "refund",
+          "order_id": "UP-PAID",
+          "description": "Edge-refund-1793155523693：独立沙箱浏览器验收，仅模拟退款1元。",
+          "quantity": 1,
+          "version": 1,
+          "status": "completed",
+          "result": {
+            "kind": "refund",
+            "amount": "1.00",
+            "case_id": "f1327572-3e46-4f4b-9a1a-a432bb552a32",
+            "order_id": "UP-PAID",
+            "refund_id": "b795b6cd-9a54-496f-a721-c306e6a35175",
+            "simulated": true,
+            "case_status": "resolved"
+          },
+          "approver": "reviewer",
+          "created_at": "2026-10-28T02:45:23.906312+00:00",
+          "amount": "1.00",
+          "ticket_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": {
+            "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+            "object_type": "order",
+            "object_id": "UP-PAID",
+            "version": 1,
+            "decision": "approved",
+            "actor": "reviewer",
+            "reason": "已核对订单归属、冻结金额与沙箱验收范围，批准模拟1元退款。",
+            "snapshot": {
+              "sku": "UP-SKU",
+              "kind": "refund",
+              "version": 1,
+              "order_id": "UP-PAID",
+              "quantity": 1,
+              "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+              "thread_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+              "created_at": "2026-10-28T02:45:23.906312+00:00",
+              "customer_id": "learner-001",
+              "description": "Edge-refund-1793155523693：独立沙箱浏览器验收，仅模拟退款1元。",
+              "amount_cents": 100
+            },
+            "snapshot_hash": "3b39ae2293c159c57ed541930a9854941b96c59eef163f759ed58d68de2a52ee",
+            "created_at": "2026-10-28T02:55:01.146645+00:00"
+          },
+          "return_status": null
+        },
+        "final_answer": "工单 f1327572-3e46-4f4b-9a1a-a432bb552a32（订单 UP-PAID）的退款模拟业务已处理，退款单号 b795b6cd-9a54-496f-a721-c306e6a35175，金额 1.00，工单状态为已解决。",
+        "next_nodes": [],
+        "metrics": {
+          "started_at": 1793155523.9520972,
+          "source": "form",
+          "reply_calls": 1,
+          "input_tokens": 152,
+          "output_tokens": 78,
+          "total_tokens": 230,
+          "usage_reported_calls": 1,
+          "finished_at": 1793156104.5995154,
+          "elapsed_seconds": 580.647
+        },
+        "business_status": "completed"
+      }
+    },
+    {
+      "phase": "customer_saved",
+      "kind": "refund",
+      "request_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+      "status": "completed",
+      "action": {
+        "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+        "customer_id": "learner-001",
+        "thread_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+        "kind": "refund",
+        "order_id": "UP-PAID",
+        "description": "Edge-refund-1793155523693：独立沙箱浏览器验收，仅模拟退款1元。",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "kind": "refund",
+          "amount": "1.00",
+          "case_id": "f1327572-3e46-4f4b-9a1a-a432bb552a32",
+          "order_id": "UP-PAID",
+          "refund_id": "b795b6cd-9a54-496f-a721-c306e6a35175",
+          "simulated": true,
+          "case_status": "resolved"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-28T02:45:23.906312+00:00",
+        "amount": "1.00",
+        "ticket_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": {
+          "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+          "object_type": "order",
+          "object_id": "UP-PAID",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "已核对订单归属、冻结金额与沙箱验收范围，批准模拟1元退款。",
+          "snapshot": {
+            "sku": "UP-SKU",
+            "kind": "refund",
+            "version": 1,
+            "order_id": "UP-PAID",
+            "quantity": 1,
+            "action_id": "71ced0f7-c2d8-435c-a88f-4569003173b3",
+            "thread_id": "form-71ce56c6591a7188afafbd9667021ff52be578a4",
+            "created_at": "2026-10-28T02:45:23.906312+00:00",
+            "customer_id": "learner-001",
+            "description": "Edge-refund-1793155523693：独立沙箱浏览器验收，仅模拟退款1元。",
+            "amount_cents": 100
+          },
+          "snapshot_hash": "3b39ae2293c159c57ed541930a9854941b96c59eef163f759ed58d68de2a52ee",
+          "created_at": "2026-10-28T02:55:01.146645+00:00"
+        },
+        "return_status": null
+      }
+    },
+    {
+      "phase": "receive_http",
+      "kind": "return_refund",
+      "status": 200,
+      "response": {
+        "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+        "customer_id": "learner-001",
+        "status": "completed",
+        "messages": [
+          {
+            "type": "human",
+            "content": "表单申请：{\"request_id\": \"req-bcad2c1c-ac0f-43f9-bbd2-9f0446d8d561\", \"kind\": \"return_refund\", \"order_id\": \"UP-SHIPPED\", \"description\": \"Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。\", \"amount\": \"1.00\", \"quantity\": 1}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "沙箱退货申请已获批准，工单 10b880ae-9b12-4c31-8d4e-3642973039ca。当前等待退货收货确认，尚未执行退款；审批员确认收货后才按已批准金额模拟退款。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "工单 10b880ae-9b12-4c31-8d4e-3642973039ca（订单 UP-SHIPPED）的退款已处理，退款单号 d94ebf34-7bdb-4fdd-9af6-1d3a06cffd50，金额 1.00，状态为已解决；该退款为模拟业务。",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+          "customer_id": "learner-001",
+          "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+          "kind": "return_refund",
+          "order_id": "UP-SHIPPED",
+          "description": "Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。",
+          "quantity": 1,
+          "version": 1,
+          "status": "completed",
+          "result": {
+            "kind": "return_refund",
+            "amount": "1.00",
+            "case_id": "10b880ae-9b12-4c31-8d4e-3642973039ca",
+            "order_id": "UP-SHIPPED",
+            "refund_id": "d94ebf34-7bdb-4fdd-9af6-1d3a06cffd50",
+            "simulated": true,
+            "case_status": "resolved",
+            "received_at": "2026-10-28T02:55:06.940023+00:00",
+            "received_by": "reviewer"
+          },
+          "approver": "reviewer",
+          "created_at": "2026-10-28T02:55:05.673916+00:00",
+          "amount": "1.00",
+          "ticket_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": {
+            "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+            "object_type": "order",
+            "object_id": "UP-SHIPPED",
+            "version": 1,
+            "decision": "approved",
+            "actor": "reviewer",
+            "reason": "已核对订单归属、冻结金额与沙箱验收范围，批准模拟1元退款。",
+            "snapshot": {
+              "sku": "UP-SKU",
+              "kind": "return_refund",
+              "version": 1,
+              "order_id": "UP-SHIPPED",
+              "quantity": 1,
+              "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+              "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+              "created_at": "2026-10-28T02:55:05.673916+00:00",
+              "customer_id": "learner-001",
+              "description": "Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。",
+              "amount_cents": 100
+            },
+            "snapshot_hash": "6e8cd84dd40fc76c9028e65392841e2980b4064c41d7b74cdfb69f5abd11238b",
+            "created_at": "2026-10-28T02:55:06.321255+00:00"
+          },
+          "return_status": "completed"
+        },
+        "final_answer": "工单 10b880ae-9b12-4c31-8d4e-3642973039ca（订单 UP-SHIPPED）的退款已处理，退款单号 d94ebf34-7bdb-4fdd-9af6-1d3a06cffd50，金额 1.00，状态为已解决；该退款为模拟业务。",
+        "next_nodes": [],
+        "metrics": {
+          "started_at": 1793156105.7544491,
+          "source": "form",
+          "finished_at": 1793156108.988354,
+          "reply_calls": 1,
+          "input_tokens": 192,
+          "output_tokens": 87,
+          "total_tokens": 279,
+          "usage_reported_calls": 1,
+          "elapsed_seconds": 3.234
+        },
+        "business_status": "completed"
+      }
+    },
+    {
+      "phase": "customer_saved",
+      "kind": "return_refund",
+      "request_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+      "status": "completed",
+      "action": {
+        "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+        "customer_id": "learner-001",
+        "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+        "kind": "return_refund",
+        "order_id": "UP-SHIPPED",
+        "description": "Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。",
+        "quantity": 1,
+        "version": 1,
+        "status": "completed",
+        "result": {
+          "kind": "return_refund",
+          "amount": "1.00",
+          "case_id": "10b880ae-9b12-4c31-8d4e-3642973039ca",
+          "order_id": "UP-SHIPPED",
+          "refund_id": "d94ebf34-7bdb-4fdd-9af6-1d3a06cffd50",
+          "simulated": true,
+          "case_status": "resolved",
+          "received_at": "2026-10-28T02:55:06.940023+00:00",
+          "received_by": "reviewer"
+        },
+        "approver": "reviewer",
+        "created_at": "2026-10-28T02:55:05.673916+00:00",
+        "amount": "1.00",
+        "ticket_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+        "risk_level": "low",
+        "manual_review": false,
+        "approval_review": {
+          "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+          "object_type": "order",
+          "object_id": "UP-SHIPPED",
+          "version": 1,
+          "decision": "approved",
+          "actor": "reviewer",
+          "reason": "已核对订单归属、冻结金额与沙箱验收范围，批准模拟1元退款。",
+          "snapshot": {
+            "sku": "UP-SKU",
+            "kind": "return_refund",
+            "version": 1,
+            "order_id": "UP-SHIPPED",
+            "quantity": 1,
+            "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+            "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+            "created_at": "2026-10-28T02:55:05.673916+00:00",
+            "customer_id": "learner-001",
+            "description": "Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。",
+            "amount_cents": 100
+          },
+          "snapshot_hash": "6e8cd84dd40fc76c9028e65392841e2980b4064c41d7b74cdfb69f5abd11238b",
+          "created_at": "2026-10-28T02:55:06.321255+00:00"
+        },
+        "return_status": "completed"
+      }
+    }
+  ]
+}

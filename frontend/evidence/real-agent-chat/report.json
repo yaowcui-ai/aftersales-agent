@@ -1,0 +1,277 @@
+{
+  "success": true,
+  "model": "real configured provider",
+  "steps": [
+    {
+      "phase": "missing_order_clarification",
+      "task": {
+        "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+        "customer_id": "learner-001",
+        "status": "answered",
+        "messages": [
+          {
+            "type": "human",
+            "content": "我想申请退款，请帮我处理。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "您好，我可以帮您处理退款申请。不过需要先确认具体是哪个订单，方便告诉我订单号吗？\n\n如果您不确定订单号，我也可以先帮您列出名下订单供您选择。",
+            "tool_calls": []
+          }
+        ],
+        "proposal": null,
+        "final_answer": "您好，我可以帮您处理退款申请。不过需要先确认具体是哪个订单，方便告诉我订单号吗？\n\n如果您不确定订单号，我也可以先帮您列出名下订单供您选择。",
+        "next_nodes": [],
+        "metrics": {
+          "started_at": 1793172823.117251,
+          "model_calls": 1,
+          "input_tokens": 1096,
+          "output_tokens": 41,
+          "total_tokens": 1137,
+          "usage_reported_calls": 1,
+          "finished_at": 1793172828.5389473,
+          "elapsed_seconds": 5.422
+        }
+      }
+    },
+    {
+      "phase": "real_model_proposal",
+      "task": {
+        "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+        "customer_id": "learner-001",
+        "status": "waiting_approval",
+        "messages": [
+          {
+            "type": "human",
+            "content": "我想申请退款，请帮我处理。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "您好，我可以帮您处理退款申请。不过需要先确认具体是哪个订单，方便告诉我订单号吗？\n\n如果您不确定订单号，我也可以先帮您列出名下订单供您选择。",
+            "tool_calls": []
+          },
+          {
+            "type": "human",
+            "content": "订单号UP-PAID，我要申请沙箱模拟退款0.20元，原因是不需要商品了。请先核对订单，再提出申请，等待系统人工审批。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "我先核对一下这个订单的信息。",
+            "tool_calls": [
+              {
+                "name": "get_order",
+                "args": {
+                  "order_id": "UP-PAID"
+                },
+                "id": "call_00_G0eYsPv8sCxpzyAM0iEh7865",
+                "type": "tool_call"
+              }
+            ]
+          },
+          {
+            "type": "tool",
+            "content": "{\"found\": true, \"order\": {\"order_id\": \"UP-PAID\", \"customer_id\": \"learner-001\", \"sku\": \"UP-SKU\", \"quantity\": 2, \"reshipped_quantity\": 0, \"status\": \"paid\", \"paid_amount\": \"199.00\", \"refunded_amount\": \"1.30\", \"policy\": {\"order_id\": \"UP-PAID\", \"aftersales_until\": \"2026-11-27T02:41:48.910039+00:00\", \"risk_level\": \"low\", \"manual_review_threshold_cents\": 50000}}}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "订单已核对：\n\n- 订单号：UP-PAID\n- 状态：paid（已付款、未发货）\n- 商品：UP-SKU × 2\n- 实付：199.00 元\n- 已退：1.30 元\n- 售后截止：2026-11-27，风险等级：low\n\n按规则，未发货的 paid 订单可申请退款；本次退款 0.20 元，累计退款 1.50 元，未超过实付 199.00 元，符合条件。现在为您提出退款申请。",
+            "tool_calls": [
+              {
+                "name": "prepare_action",
+                "args": {
+                  "kind": "refund",
+                  "order_id": "UP-PAID",
+                  "amount": "0.20",
+                  "description": "沙箱模拟退款0.20元，原因：不需要商品了"
+                },
+                "id": "call_00_Q5sYe7mOs6NeEQNl0vOv6334",
+                "type": "tool_call"
+              }
+            ]
+          },
+          {
+            "type": "tool",
+            "content": "{\"proposal\": {\"action_id\": \"25b1f445-65b0-4e4f-96c9-c813bf6a1ab3\", \"customer_id\": \"learner-001\", \"thread_id\": \"web-df38fc7c-b2c3-4e64-ae22-bfac11206adf\", \"kind\": \"refund\", \"order_id\": \"UP-PAID\", \"description\": \"沙箱模拟退款0.20元，原因：不需要商品了\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-28T07:33:58.826206+00:00\", \"amount\": \"0.20\", \"ticket_id\": \"25b1f445-65b0-4e4f-96c9-c813bf6a1ab3\", \"risk_level\": \"low\", \"manual_review\": false, \"approval_review\": null, \"return_status\": null}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+          "customer_id": "learner-001",
+          "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+          "kind": "refund",
+          "order_id": "UP-PAID",
+          "description": "沙箱模拟退款0.20元，原因：不需要商品了",
+          "quantity": 1,
+          "version": 1,
+          "status": "waiting_approval",
+          "result": null,
+          "approver": null,
+          "created_at": "2026-10-28T07:33:58.826206+00:00",
+          "amount": "0.20",
+          "ticket_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": null,
+          "return_status": null
+        },
+        "final_answer": null,
+        "next_nodes": [
+          "approval"
+        ],
+        "metrics": {
+          "started_at": 1793172828.6855056,
+          "model_calls": 2,
+          "input_tokens": 2555,
+          "output_tokens": 278,
+          "total_tokens": 2833,
+          "usage_reported_calls": 2,
+          "elapsed_seconds": 10.188
+        },
+        "business_status": "waiting_approval"
+      }
+    },
+    {
+      "phase": "approved_business_result",
+      "task": {
+        "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+        "customer_id": "learner-001",
+        "status": "completed",
+        "messages": [
+          {
+            "type": "human",
+            "content": "我想申请退款，请帮我处理。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "您好，我可以帮您处理退款申请。不过需要先确认具体是哪个订单，方便告诉我订单号吗？\n\n如果您不确定订单号，我也可以先帮您列出名下订单供您选择。",
+            "tool_calls": []
+          },
+          {
+            "type": "human",
+            "content": "订单号UP-PAID，我要申请沙箱模拟退款0.20元，原因是不需要商品了。请先核对订单，再提出申请，等待系统人工审批。",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "我先核对一下这个订单的信息。",
+            "tool_calls": [
+              {
+                "name": "get_order",
+                "args": {
+                  "order_id": "UP-PAID"
+                },
+                "id": "call_00_G0eYsPv8sCxpzyAM0iEh7865",
+                "type": "tool_call"
+              }
+            ]
+          },
+          {
+            "type": "tool",
+            "content": "{\"found\": true, \"order\": {\"order_id\": \"UP-PAID\", \"customer_id\": \"learner-001\", \"sku\": \"UP-SKU\", \"quantity\": 2, \"reshipped_quantity\": 0, \"status\": \"paid\", \"paid_amount\": \"199.00\", \"refunded_amount\": \"1.30\", \"policy\": {\"order_id\": \"UP-PAID\", \"aftersales_until\": \"2026-11-27T02:41:48.910039+00:00\", \"risk_level\": \"low\", \"manual_review_threshold_cents\": 50000}}}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "订单已核对：\n\n- 订单号：UP-PAID\n- 状态：paid（已付款、未发货）\n- 商品：UP-SKU × 2\n- 实付：199.00 元\n- 已退：1.30 元\n- 售后截止：2026-11-27，风险等级：low\n\n按规则，未发货的 paid 订单可申请退款；本次退款 0.20 元，累计退款 1.50 元，未超过实付 199.00 元，符合条件。现在为您提出退款申请。",
+            "tool_calls": [
+              {
+                "name": "prepare_action",
+                "args": {
+                  "kind": "refund",
+                  "order_id": "UP-PAID",
+                  "amount": "0.20",
+                  "description": "沙箱模拟退款0.20元，原因：不需要商品了"
+                },
+                "id": "call_00_Q5sYe7mOs6NeEQNl0vOv6334",
+                "type": "tool_call"
+              }
+            ]
+          },
+          {
+            "type": "tool",
+            "content": "{\"proposal\": {\"action_id\": \"25b1f445-65b0-4e4f-96c9-c813bf6a1ab3\", \"customer_id\": \"learner-001\", \"thread_id\": \"web-df38fc7c-b2c3-4e64-ae22-bfac11206adf\", \"kind\": \"refund\", \"order_id\": \"UP-PAID\", \"description\": \"沙箱模拟退款0.20元，原因：不需要商品了\", \"quantity\": 1, \"version\": 1, \"status\": \"waiting_approval\", \"result\": null, \"approver\": null, \"created_at\": \"2026-10-28T07:33:58.826206+00:00\", \"amount\": \"0.20\", \"ticket_id\": \"25b1f445-65b0-4e4f-96c9-c813bf6a1ab3\", \"risk_level\": \"low\", \"manual_review\": false, \"approval_review\": null, \"return_status\": null}, \"notice\": \"等待系统人工审批，尚未执行业务操作。\"}",
+            "tool_calls": []
+          },
+          {
+            "type": "ai",
+            "content": "工单 c5ab9780-a710-4df4-82b8-70d13c2606e9（订单 UP-PAID）的退款已处理：退款单号 b2295dde-5890-48e2-8a57-5e117d1c5892，金额 0.20，状态为已解决。该退款为模拟业务。",
+            "tool_calls": []
+          }
+        ],
+        "proposal": {
+          "action_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+          "customer_id": "learner-001",
+          "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+          "kind": "refund",
+          "order_id": "UP-PAID",
+          "description": "沙箱模拟退款0.20元，原因：不需要商品了",
+          "quantity": 1,
+          "version": 1,
+          "status": "completed",
+          "result": {
+            "kind": "refund",
+            "amount": "0.20",
+            "case_id": "c5ab9780-a710-4df4-82b8-70d13c2606e9",
+            "order_id": "UP-PAID",
+            "refund_id": "b2295dde-5890-48e2-8a57-5e117d1c5892",
+            "simulated": true,
+            "case_status": "resolved"
+          },
+          "approver": "reviewer",
+          "created_at": "2026-10-28T07:33:58.826206+00:00",
+          "amount": "0.20",
+          "ticket_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+          "risk_level": "low",
+          "manual_review": false,
+          "approval_review": {
+            "action_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+            "object_type": "order",
+            "object_id": "UP-PAID",
+            "version": 1,
+            "decision": "approved",
+            "actor": "reviewer",
+            "reason": "核对真实Agent申请、订单归属及冻结0.20元金额，同意沙箱执行。",
+            "snapshot": {
+              "sku": "UP-SKU",
+              "kind": "refund",
+              "version": 1,
+              "order_id": "UP-PAID",
+              "quantity": 1,
+              "action_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3",
+              "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+              "created_at": "2026-10-28T07:33:58.826206+00:00",
+              "customer_id": "learner-001",
+              "description": "沙箱模拟退款0.20元，原因：不需要商品了",
+              "amount_cents": 20
+            },
+            "snapshot_hash": "675045f330322fc1b46abcaffcfcf1a506d76e5af04f8acd9b26af90219c6ad3",
+            "created_at": "2026-10-28T07:33:59.704095+00:00"
+          },
+          "return_status": null
+        },
+        "final_answer": "工单 c5ab9780-a710-4df4-82b8-70d13c2606e9（订单 UP-PAID）的退款已处理：退款单号 b2295dde-5890-48e2-8a57-5e117d1c5892，金额 0.20，状态为已解决。该退款为模拟业务。",
+        "next_nodes": [],
+        "metrics": {
+          "started_at": 1793172828.6855056,
+          "model_calls": 2,
+          "input_tokens": 2711,
+          "output_tokens": 362,
+          "total_tokens": 3073,
+          "usage_reported_calls": 3,
+          "reply_calls": 1,
+          "finished_at": 1793172842.0316353,
+          "elapsed_seconds": 13.346
+        },
+        "business_status": "completed"
+      }
+    }
+  ],
+  "thread_id": "web-df38fc7c-b2c3-4e64-ae22-bfac11206adf",
+  "action_id": "25b1f445-65b0-4e4f-96c9-c813bf6a1ab3"
+}

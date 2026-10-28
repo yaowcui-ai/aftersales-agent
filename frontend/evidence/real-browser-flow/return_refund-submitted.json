@@ -1,0 +1,42 @@
+{
+  "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+  "customer_id": "learner-001",
+  "status": "waiting_approval",
+  "messages": [
+    {
+      "type": "human",
+      "content": "表单申请：{\"request_id\": \"req-bcad2c1c-ac0f-43f9-bbd2-9f0446d8d561\", \"kind\": \"return_refund\", \"order_id\": \"UP-SHIPPED\", \"description\": \"Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。\", \"amount\": \"1.00\", \"quantity\": 1}",
+      "tool_calls": []
+    }
+  ],
+  "proposal": {
+    "action_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+    "customer_id": "learner-001",
+    "thread_id": "form-3b96485af8412b7e4d5196b0b86b17e4bb7f53f1",
+    "kind": "return_refund",
+    "order_id": "UP-SHIPPED",
+    "description": "Edge-return_refund-1793156105476：独立沙箱浏览器验收，仅模拟退款1元。",
+    "quantity": 1,
+    "version": 1,
+    "status": "waiting_approval",
+    "result": null,
+    "approver": null,
+    "created_at": "2026-10-28T02:55:05.673916+00:00",
+    "amount": "1.00",
+    "ticket_id": "f19ac839-e04c-480d-9bbe-cdf74c7f8836",
+    "risk_level": "low",
+    "manual_review": false,
+    "approval_review": null,
+    "return_status": "waiting_approval"
+  },
+  "final_answer": null,
+  "next_nodes": [
+    "approval"
+  ],
+  "metrics": {
+    "started_at": 1793156105.7544491,
+    "source": "form",
+    "elapsed_seconds": 0.056
+  },
+  "business_status": "waiting_approval"
+}
