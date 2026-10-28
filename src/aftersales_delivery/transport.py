@@ -35,23 +35,33 @@ async def call_tool(config, customer_id, name, arguments, *, action_id=None):
         action_id=action_id,
         ttl=90,
     )
-    async with streamablehttp_client(
-        config.mcp_url,
-        headers={"Authorization": f"Bearer {token}"},
-        timeout=timedelta(seconds=20),
-        sse_read_timeout=timedelta(seconds=45),
-        httpx_client_factory=http_client,
-    ) as (read, write, _):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            result = await session.call_tool(name, arguments)
-            if result.isError:
-                text = " ".join(block.text for block in result.content if block.type == "text")
-                safe = text.split(":")[-1].strip()
-                if safe.isupper() and len(safe) < 80:
-                    raise BusinessError(safe)
-                raise RuntimeError("MCP_TOOL_FAILED")
-            texts = [block.text for block in result.content if block.type == "text"]
-            if not texts:
-                raise RuntimeError("MCP_RESULT_EMPTY")
-            return json.loads(texts[0])
+    try:
+        async with streamablehttp_client(
+            config.mcp_url,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=timedelta(seconds=20),
+            sse_read_timeout=timedelta(seconds=45),
+            httpx_client_factory=http_client,
+        ) as (read, write, _):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
+                result = await session.call_tool(name, arguments)
+                if result.isError:
+                    text = " ".join(block.text for block in result.content if block.type == "text")
+                    safe = text.split(":")[-1].strip()
+                    if safe.isupper() and len(safe) < 80:
+                        raise BusinessError(safe)
+                    raise RuntimeError("MCP_TOOL_FAILED")
+                texts = [block.text for block in result.content if block.type == "text"]
+                if not texts:
+                    raise RuntimeError("MCP_RESULT_EMPTY")
+                return json.loads(texts[0])
+    except BaseExceptionGroup as group:
+        def leaves(error):
+            if isinstance(error, BaseExceptionGroup):
+                return [leaf for child in error.exceptions for leaf in leaves(child)]
+            return [error]
+        errors = leaves(group)
+        if len(errors) == 1 and isinstance(errors[0], BusinessError):
+            raise errors[0] from None
+        raise

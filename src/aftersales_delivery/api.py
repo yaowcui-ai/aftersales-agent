@@ -2,7 +2,9 @@
 
 import asyncio
 import logging
+import json
 import time
+import uuid
 from contextlib import AsyncExitStack, asynccontextmanager
 from pathlib import Path
 from typing import Annotated
@@ -57,6 +59,7 @@ class Message(Input):
 class Decision(Input):
     approved: bool
     version: int = Field(ge=1)
+    reason: str = Field(default="", max_length=1000)
 
 
 class CaseStatus(Input):
@@ -179,7 +182,7 @@ class Runtime:
             metrics["elapsed_seconds"] = round(
                 metrics.get("finished_at", time.time()) - metrics["started_at"], 3
             )
-        return {
+        result = {
             "thread_id": thread,
             "customer_id": customer,
             "status": values.get("status", "running"),
@@ -189,6 +192,25 @@ class Runtime:
             "next_nodes": list(snapshot.next),
             "metrics": metrics,
         }
+        if self.config.platform_enabled:
+            from aftersales_delivery.task_tracking import save_task
+
+            proposal = values.get("proposal")
+            if proposal:
+                action = await self.store.get_action(proposal["action_id"])
+                result["proposal"] = action
+                result["business_status"] = action["status"]
+                if action["status"] == "failed":
+                    result.update(status="execution_failed", final_answer=None)
+                elif action["status"] == "cancelled":
+                    result.update(status="cancelled", final_answer="申请已取消，未执行退款或补发。")
+                elif action["status"] == "completed" and result["status"] not in {"completed", "reply_failed"}:
+                    result.update(status="recovery_required", final_answer=None,
+                                  recovery_required=True)
+            await save_task(self.store.engine, customer, thread, result["status"],
+                            final_answer=result["final_answer"],
+                            action_id=(result.get("proposal") or {}).get("action_id"))
+        return result
 
     async def resume(self, action):
         customer, thread = action["customer_id"], action["thread_id"]
@@ -206,7 +228,10 @@ class Runtime:
                 if not after.next:
                     return await self.state(customer, thread)
                 continue
-            if snapshot.values.get("status") == "reply_failed":
+            if snapshot.values.get("status") == "reply_failed" or (
+                action["status"] == "completed"
+                and snapshot.values.get("status") == "awaiting_return"
+            ):
                 await graph.aupdate_state(
                     config, {"proposal": action, "status": "executed"}, as_node="execute"
                 )
@@ -222,6 +247,10 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
     async def lifespan(app):
         engine = create_async_engine(config.db_url, pool_pre_ping=True)
         try:
+            if config.platform_enabled:
+                from aftersales_delivery.db import initialize, seed_platform
+                await initialize(engine)
+                await seed_platform(engine)
             async with AsyncExitStack() as stack:
                 if config.checkpoint_backend == "sqlite":
                     Path(config.checkpoint_path).parent.mkdir(parents=True, exist_ok=True)
@@ -244,6 +273,24 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
 
     app = FastAPI(title="电商售后 Agent 交付服务", version="1.0.0", lifespan=lifespan)
     login_attempts = {}
+
+    @app.middleware("http")
+    async def request_log(request: Request, call_next):
+        # Never log bodies, credentials, tokens, database URLs or model prompts.
+        request_id = uuid.uuid4().hex
+        started = time.monotonic()
+        try:
+            response = await call_next(request)
+        except Exception:
+            logger.warning(json.dumps({"event": "request_failed", "request_id": request_id,
+                                       "method": request.method, "route": request.url.path}))
+            raise
+        response.headers["X-Request-ID"] = request_id
+        logger.info(json.dumps({"event": "http_request", "request_id": request_id,
+                               "method": request.method, "route": request.url.path,
+                               "status": response.status_code,
+                               "elapsed_ms": round((time.monotonic() - started) * 1000, 2)}))
+        return response
 
     async def runtime(request: Request):
         return request.app.state.runtime
@@ -279,7 +326,7 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
         from fastapi.responses import JSONResponse
 
         status = (
-            404 if error.code in {"ORDER_NOT_FOUND", "CASE_NOT_FOUND", "ACTION_NOT_FOUND"} else 409
+            404 if error.code in {"ORDER_NOT_FOUND", "CASE_NOT_FOUND", "ACTION_NOT_FOUND", "TICKET_NOT_FOUND"} else 409
         )
         return JSONResponse(
             status_code=status,
@@ -360,8 +407,12 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
                 raise public_error(
                     "EXPLICIT_OPERATION_REQUIRED", 409, "任务已有待处理操作；新申请请新建任务。"
                 )
-            with tracing_context(enabled=False):
-                await graph.ainvoke(
+            if config.platform_enabled:
+                from aftersales_delivery.task_tracking import save_task
+                await save_task(rt.store.engine, customer, thread_id, "running", last_message=body.message)
+            try:
+                with tracing_context(enabled=False):
+                    await graph.ainvoke(
                     {
                         "messages": [HumanMessage(content=body.message)],
                         "turn_calls": 0,
@@ -371,7 +422,11 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
                     },
                     graph_options,
                     durability="sync",
-                )
+                    )
+            except Exception as error:
+                if config.platform_enabled:
+                    await save_task(rt.store.engine, customer, thread_id, "failed", error_code=type(error).__name__)
+                raise
             return await rt.state(customer, thread_id)
 
     @app.get("/tasks/{thread_id}")
@@ -400,16 +455,19 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
     async def approvals(user=Depends(approver), rt=Depends(runtime)):
         return await rt.store.list_actions(None)
 
-    async def decision_result(action_id, approved, version, user, rt, *, retry=False):
+    async def decision_result(action_id, approved, version, user, rt, *, retry=False, reason=""):
         action = await rt.store.get_action(action_id)
         if action is None:
             raise public_error("ACTION_NOT_FOUND", 404)
         async with rt.lock(action["customer_id"], action["thread_id"]):
             if retry:
-                if action["status"] not in {"approved", "completed", "failed"}:
+                if action["status"] not in {"approved", "completed", "failed", "awaiting_return"}:
                     raise public_error("NOT_APPROVED")
             else:
-                action = await rt.store.decide(action_id, approved, version, user["username"])
+                if config.platform_enabled:
+                    action = await rt.store.decide(action_id, approved, version, user["username"], reason=reason)
+                else:
+                    action = await rt.store.decide(action_id, approved, version, user["username"])
             result = await rt.resume(action)
             if result["status"] == "reply_failed":
                 raise public_error(
@@ -421,7 +479,7 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
 
     @app.post("/approvals/{action_id}/decision")
     async def decide(action_id: str, body: Decision, user=Depends(approver), rt=Depends(runtime)):
-        return await decision_result(action_id, body.approved, body.version, user, rt)
+        return await decision_result(action_id, body.approved, body.version, user, rt, reason=body.reason)
 
     @app.post("/approvals/{action_id}/retry")
     async def retry(action_id: str, user=Depends(approver), rt=Depends(runtime)):
@@ -459,6 +517,9 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
             raise public_error("ACTION_NOT_FOUND", 404)
         return await rt.store.get_events(action_id)
 
+    if config.platform_enabled:
+        from aftersales_delivery.platform_api import register_platform_routes
+        register_platform_routes(app, config, runtime, identity, approver)
     return app
 
 

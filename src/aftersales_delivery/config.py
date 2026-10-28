@@ -23,6 +23,7 @@ class Config:
     checkpoint_backend: str = "mysql"
     model_mode: str = "deepseek"
     max_model_calls: int = 6
+    platform_enabled: bool = False
 
 
 def project_values() -> dict:
@@ -78,4 +79,5 @@ def get_config() -> Config:
             "DELIVERY_CHECKPOINT_PATH", "output/delivery/checkpoints.sqlite"
         ),
         model_mode=values.get("DELIVERY_MODEL_MODE", "deepseek"),
+        platform_enabled=values.get("DELIVERY_PLATFORM_ENABLED", "0") == "1",
     )
