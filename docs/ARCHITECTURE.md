@@ -44,3 +44,5 @@ flowchart LR
 ## 部署
 
 升级Compose项目为 `aftersales-upgrade`，独立 `platform_mysql` 卷，不映射宿主3306。React18520、API18100、MCP18101；单API worker，本机演示账户。未接真实支付/仓储，非公网生产部署。数据库初始化只追加缺失记录，不覆盖旧数据。无冻结审计的历史已批准动作安全拒绝，不自动伪造旧审批快照。
+
+交付另从默认 `python:3.12-slim` 构建干净后端镜像，实际安装锁定依赖；使用 `--network none` 导入API/MCP，证明不依赖原有预装项目镜像才能安装。初次构建需要下载上游完整依赖，耗时与网络有关；原始构建输出及镜像ID见 `evaluation/upgrade/runtime/clean-image-*`。该导入检查与运行容器上的真实业务/浏览器验收分开记录。

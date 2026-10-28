@@ -104,6 +104,7 @@ docker compose --env-file .env.delivery -f compose.upgrade.yaml exec -T api pyth
 |---|---|---|
 | Python自动化 | 150项通过（含83项旧回归） | [输出](evaluation/upgrade/runtime/python-tests.txt) |
 | React单测/生产构建 | 6项HTTP/恢复测试，TypeScript与Vite构建 | [前端](frontend/) |
+| 干净后端镜像 | 从默认Python基础镜像安装锁定依赖，断网导入API/MCP成功 | [构建核验](evaluation/upgrade/runtime/clean-image-verification.json) |
 | 真实MySQL及独立HTTP MCP | 7项事务、并发、归属/审批检查 | [MySQL/MCP](evaluation/upgrade/runtime/mysql-http-mcp.json) |
 | 真实Docker进程故障 | 停MCP、审批保存、API替换、同动作恢复/重放 | [运行目录](evaluation/upgrade/runtime/) |
 | 生产React真实Agent闭环 | 补问→工具→申请→界面审批→模拟退款→刷新恢复 | [完整轨迹/截图](frontend/evidence/real-agent-chat/) |

@@ -1,0 +1,357 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.platform
+#1 DONE 0.3s
+
+#1 [internal] load build definition from Dockerfile.platform
+#1 transferring dockerfile:
+#1 transferring dockerfile: 728B 1.2s done
+#1 DONE 2.4s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim
+#2 DONE 24.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context:
+#3 transferring context: 334B 0.4s done
+#3 DONE 0.8s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [1/9] FROM docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+#5 resolve docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+#5 resolve docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159 0.2s done
+#5 DONE 1.3s
+
+#4 [internal] load build context
+#4 transferring context: 4.58kB 0.7s done
+#4 DONE 1.0s
+
+#6 [2/9] WORKDIR /app
+#6 DONE 0.7s
+
+#7 [3/9] COPY pyproject.toml uv.lock ./
+#7 DONE 2.8s
+
+#8 [4/9] RUN python -c "import fastapi,asyncmy,langgraph,mcp" || (pip install --no-cache-dir uv==0.12.5 && uv sync --frozen --no-install-project --no-dev)
+#8 14.26 Traceback (most recent call last):
+#8 14.26   File "<string>", line 1, in <module>
+#8 14.26 ModuleNotFoundError: No module named 'fastapi'
+#8 25.72 Collecting uv==0.12.5
+#8 26.84   Downloading uv-0.12.5-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+#8 27.24 Downloading uv-0.12.5-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23.7 MB)
+#8 55.44    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.7/23.7 MB 848.5 kB/s eta 0:00:00
+#8 55.49 Installing collected packages: uv
+#8 56.01 Successfully installed uv-0.12.5
+#8 56.01 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#8 57.75 
+#8 57.75 [notice] A new release of pip is available: 25.0.1 -> 26.2.2
+#8 57.75 [notice] To update, run: pip install --upgrade pip
+#8 59.70 Downloading kubernetes (4.4MiB)
+#8 59.70 Downloading pygments (1.2MiB)
+#8 59.70 Downloading google-cloud-aiplatform (9.0MiB)
+#8 59.71 Downloading anthropic (1.1MiB)
+#8 59.71 Downloading google-genai (1.0MiB)
+#8 59.71 Downloading numpy (15.9MiB)
+#8 59.71 Downloading chromadb (22.2MiB)
+#8 59.71 Downloading botocore (15.0MiB)
+#8 59.72 Downloading psycopg-binary (4.9MiB)
+#8 59.72 Downloading streamlit (9.9MiB)
+#8 59.72 Downloading sqlalchemy (3.2MiB)
+#8 59.72 Downloading grpcio (6.5MiB)
+#8 59.72 Downloading aiohttp (1.7MiB)
+#8 59.72 Downloading pydantic-core (2.0MiB)
+#8 59.72 Downloading pymongo (1.6MiB)
+#8 59.72 Downloading langchain-community (2.3MiB)
+#8 59.72 Downloading openai (1.6MiB)
+#8 59.72 Downloading pandas (10.5MiB)
+#8 59.73 Downloading tiktoken (1.1MiB)
+#8 59.73 Downloading hf-xet (4.3MiB)
+#8 59.73 Downloading zstandard (5.3MiB)
+#8 59.73 Downloading pydeck (10.9MiB)
+#8 59.84 Downloading lxml (5.0MiB)
+#8 59.84 Downloading cryptography (4.5MiB)
+#8 59.85 Downloading tokenizers (3.2MiB)
+#8 59.85 Downloading pyowm (4.3MiB)
+#8 59.85 Downloading asyncmy (6.5MiB)
+#8 59.85 Downloading onnxruntime (17.8MiB)
+#8 59.85 Downloading uvloop (4.2MiB)
+#8 59.85 Downloading primp (5.1MiB)
+#8 59.85 Downloading pillow (6.6MiB)
+#8 59.85 Downloading pyarrow (45.4MiB)
+#8 59.85 Downloading brotli (1.4MiB)
+#8 90.67  Downloaded google-genai
+#8 96.00  Downloaded anthropic
+#8 97.96  Downloaded pygments
+#8 102.8  Downloaded tiktoken
+#8 118.2  Downloaded brotli
+#8 124.5  Downloaded openai
+#8 132.7  Downloaded pymongo
+#8 134.0  Downloaded aiohttp
+#8 156.7  Downloaded pydantic-core
+#8 160.3  Downloaded langchain-community
+#8 188.9  Downloaded tokenizers
+#8 190.6  Downloaded sqlalchemy
+#8 232.0  Downloaded uvloop
+#8 237.1  Downloaded pyowm
+#8 237.7  Downloaded hf-xet
+#8 237.9  Downloaded kubernetes
+#8 242.5  Downloaded cryptography
+#8 248.6  Downloaded psycopg-binary
+#8 254.0  Downloaded lxml
+#8 255.3  Downloaded primp
+#8 257.6  Downloaded zstandard
+#8 275.7  Downloaded grpcio
+#8 278.0  Downloaded asyncmy
+#8 280.2  Downloaded pillow
+#8 308.7  Downloaded google-cloud-aiplatform
+#8 321.5  Downloaded streamlit
+#8 326.5  Downloaded pandas
+#8 327.8  Downloaded pydeck
+#8 349.8  Downloaded botocore
+#8 354.6  Downloaded numpy
+#8 366.3  Downloaded onnxruntime
+#8 384.3  Downloaded chromadb
+#8 420.4  Downloaded pyarrow
+#8 420.4 Prepared 208 packages in 6m 02s
+#8 421.7 Installed 208 packages in 1.26s
+#8 421.7  + ag-ui-a2ui-toolkit==0.0.4
+#8 421.7  + ag-ui-langgraph==0.0.43
+#8 421.7  + ag-ui-protocol==0.1.20
+#8 421.7  + aiohappyeyeballs==2.7.1
+#8 421.7  + aiohttp==3.14.3
+#8 421.7  + aiosignal==1.4.0
+#8 421.7  + aiosqlite==0.22.1
+#8 421.7  + altair==6.2.2
+#8 421.7  + annotated-doc==0.0.5
+#8 421.7  + annotated-types==0.8.0
+#8 421.7  + anthropic==0.125.0
+#8 421.7  + anyio==4.14.2
+#8 421.7  + asyncmy==0.2.15
+#8 421.7  + attrs==26.1.0
+#8 421.7  + backoff==2.2.1
+#8 421.7  + bcrypt==5.0.0
+#8 421.7  + blinker==1.9.0
+#8 421.7  + boto3==1.43.78
+#8 421.7  + botocore==1.43.78
+#8 421.7  + bottleneck==1.6.0
+#8 421.7  + brotli==1.2.0
+#8 421.7  + build==1.5.0
+#8 421.7  + cachetools==7.1.7
+#8 421.7  + certifi==2026.7.22
+#8 421.7  + cffi==2.1.1
+#8 421.7  + charset-normalizer==3.5.1
+#8 421.7  + chromadb==1.5.9
+#8 421.7  + click==8.4.2
+#8 421.7  + cryptography==50.0.0
+#8 421.7  + ddgs==9.15.0
+#8 421.7  + distro==1.9.0
+#8 421.7  + dnspython==2.8.0
+#8 421.7  + docstring-parser==0.18.0
+#8 421.7  + docx2txt==0.9
+#8 421.7  + duckduckgo-search==8.1.1
+#8 421.7  + durationpy==0.10
+#8 421.7  + fake-useragent==2.2.0
+#8 421.7  + fastapi==0.141.1
+#8 421.7  + filelock==3.32.3
+#8 421.7  + filetype==1.2.0
+#8 421.7  + flatbuffers==25.12.19
+#8 421.7  + frozenlist==1.8.0
+#8 421.7  + fsspec==2026.7.0
+#8 421.7  + geojson==3.3.0
+#8 421.7  + gitdb==4.0.12
+#8 421.7  + gitpython==3.1.62
+#8 421.7  + google-api-core==2.34.0
+#8 421.7  + google-auth==2.56.3
+#8 421.7  + google-cloud-aiplatform==1.165.1
+#8 421.7  + google-cloud-bigquery==3.43.0
+#8 421.7  + google-cloud-core==2.6.1
+#8 421.7  + google-cloud-resource-manager==1.18.0
+#8 421.7  + google-cloud-storage==3.13.1
+#8 421.7  + google-cloud-vectorsearch==0.11.1
+#8 421.7  + google-crc32c==1.8.0
+#8 421.7  + google-genai==2.19.0
+#8 421.7  + google-resumable-media==2.10.1
+#8 421.7  + googleapis-common-protos==1.75.1
+#8 421.7  + greenlet==3.5.5
+#8 421.7  + groq==0.37.1
+#8 421.7  + grpc-google-iam-v1==0.14.5
+#8 421.7  + grpcio==1.80.0
+#8 421.7  + grpcio-status==1.80.0
+#8 421.7  + h11==0.16.0
+#8 421.7  + h2==4.4.1
+#8 421.7  + hf-xet==1.6.0
+#8 421.7  + hpack==4.2.0
+#8 421.7  + httpcore==1.0.9
+#8 421.7  + httptools==0.8.0
+#8 421.7  + httpx==0.28.1
+#8 421.7  + httpx-sse==0.4.3
+#8 421.7  + huggingface-hub==1.28.0
+#8 421.7  + hyperframe==6.1.0
+#8 421.7  + idna==3.19
+#8 421.7  + importlib-resources==7.1.0
+#8 421.7  + itsdangerous==2.2.0
+#8 421.7  + jinja2==3.1.6
+#8 421.7  + jiter==0.16.0
+#8 421.7  + jmespath==1.1.0
+#8 421.7  + jsonpatch==1.33
+#8 421.7  + jsonpointer==3.1.1
+#8 421.7  + jsonschema==4.26.0
+#8 421.7  + jsonschema-specifications==2025.9.1
+#8 421.7  + kubernetes==36.0.3
+#8 421.7  + langchain==1.3.14
+#8 421.7  + langchain-anthropic==1.4.8
+#8 421.7  + langchain-aws==1.6.4
+#8 421.7  + langchain-chroma==1.1.0
+#8 421.7  + langchain-classic==1.0.8
+#8 421.7  + langchain-community==0.4.2
+#8 421.7  + langchain-core==1.4.9
+#8 421.7  + langchain-google-genai==4.2.7
+#8 421.7  + langchain-google-vertexai==3.2.4
+#8 421.7  + langchain-groq==1.1.3
+#8 421.7  + langchain-mcp-adapters==0.3.2
+#8 421.7  + langchain-mongodb==0.11.0
+#8 421.7  + langchain-ollama==1.1.0
+#8 421.7  + langchain-openai==1.3.5
+#8 421.7  + langchain-protocol==0.0.18
+#8 421.7  + langchain-text-splitters==1.1.2
+#8 421.7  + langfuse==4.14.4
+#8 421.7  + langgraph==1.2.11
+#8 421.7  + langgraph-checkpoint==4.2.0
+#8 421.7  + langgraph-checkpoint-mongodb==0.4.0
+#8 421.7  + langgraph-checkpoint-mysql==3.0.0
+#8 421.7  + langgraph-checkpoint-postgres==3.1.2
+#8 421.7  + langgraph-checkpoint-sqlite==3.1.1
+#8 421.7  + langgraph-prebuilt==1.1.0
+#8 421.7  + langgraph-sdk==0.4.4
+#8 421.7  + langgraph-supervisor==0.0.31
+#8 421.7  + langsmith==0.11.1
+#8 421.7  + lark==1.3.1
+#8 421.7  + lxml==6.1.2
+#8 421.7  + markdown-it-py==4.2.0
+#8 421.7  + markupsafe==3.0.3
+#8 421.7  + mcp==1.29.0
+#8 421.7  + mdurl==0.1.2
+#8 421.7  + mmh3==5.2.1
+#8 421.7  + multidict==6.7.1
+#8 421.7  + narwhals==2.25.0
+#8 421.7  + numexpr==2.14.2
+#8 421.7  + numpy==2.5.2
+#8 421.7  + oauthlib==3.3.1
+#8 421.7  + ollama==0.6.2
+#8 421.7  + onnxruntime==1.27.0
+#8 421.7  + openai==2.54.0
+#8 421.7  + opentelemetry-api==1.44.0
+#8 421.7  + opentelemetry-exporter-otlp-proto-common==1.44.0
+#8 421.7  + opentelemetry-exporter-otlp-proto-grpc==1.44.0
+#8 421.7  + opentelemetry-exporter-otlp-proto-http==1.44.0
+#8 421.7  + opentelemetry-proto==1.44.0
+#8 421.7  + opentelemetry-sdk==1.44.0
+#8 421.7  + opentelemetry-semantic-conventions==0.65b0
+#8 421.7  + orjson==3.12.0
+#8 421.7  + ormsgpack==1.12.2
+#8 421.7  + overrides==7.7.0
+#8 421.7  + packaging==26.3
+#8 421.7  + pandas==3.0.5
+#8 421.7  + pillow==12.3.0
+#8 421.7  + primp==1.3.1
+#8 421.7  + propcache==0.5.2
+#8 421.7  + proto-plus==1.28.3
+#8 421.7  + protobuf==6.33.6
+#8 421.7  + psycopg==3.3.4
+#8 421.7  + psycopg-binary==3.3.4
+#8 421.7  + psycopg-pool==3.3.1
+#8 421.7  + pyarrow==23.0.1
+#8 421.7  + pyasn1==0.6.4
+#8 421.7  + pyasn1-modules==0.4.2
+#8 421.7  + pybase64==1.5.0
+#8 421.7  + pycparser==3.0
+#8 421.7  + pydantic==2.13.4
+#8 421.7  + pydantic-core==2.46.4
+#8 421.7  + pydantic-settings==2.15.0
+#8 421.7  + pydeck==0.9.3
+#8 421.7  + pygments==2.21.0
+#8 421.7  + pyjwt==2.13.0
+#8 421.7  + pymongo==4.16.0
+#8 421.7  + pymongo-search-utils==0.3.0
+#8 421.7  + pyowm==3.5.0
+#8 421.7  + pypdf==6.19.0
+#8 421.7  + pypika==0.51.1
+#8 421.7  + pyproject-hooks==1.2.0
+#8 421.7  + pysocks==1.7.1
+#8 421.7  + python-dateutil==2.9.0.post0
+#8 421.7  + python-dotenv==1.2.3
+#8 421.7  + python-multipart==0.0.32
+#8 421.7  + pyyaml==6.0.3
+#8 421.7  + referencing==0.37.0
+#8 421.7  + regex==2026.7.19
+#8 421.7  + requests==2.34.2
+#8 421.7  + requests-oauthlib==2.0.0
+#8 421.7  + requests-toolbelt==1.0.0
+#8 421.7  + rich==15.0.0
+#8 421.7  + rpds-py==2026.6.3
+#8 421.7  + s3transfer==0.19.2
+#8 421.7  + setuptools==84.0.0
+#8 421.7  + shellingham==1.5.4
+#8 421.7  + six==1.17.0
+#8 421.7  + smmap==5.0.3
+#8 421.7  + sniffio==1.3.1
+#8 421.7  + socksio==1.0.0
+#8 421.7  + sqlalchemy==2.0.52
+#8 421.7  + sqlite-vec==0.1.9
+#8 421.7  + sse-starlette==3.3.4
+#8 421.7  + starlette==1.6.0
+#8 421.7  + streamlit==1.59.2
+#8 421.7  + tenacity==9.1.4
+#8 421.7  + tiktoken==0.14.0
+#8 421.7  + tokenizers==0.23.1
+#8 421.7  + toml==0.10.2
+#8 421.7  + tqdm==4.70.0
+#8 421.7  + typer==0.27.1
+#8 421.7  + typing-extensions==4.16.0
+#8 421.7  + typing-inspection==0.4.4
+#8 421.7  + urllib3==2.8.0
+#8 421.7  + uuid-utils==0.17.0
+#8 421.7  + uvicorn==0.52.4
+#8 421.7  + uvloop==0.22.1
+#8 421.7  + validators==0.35.0
+#8 421.7  + watchdog==6.0.0
+#8 421.7  + watchfiles==1.2.0
+#8 421.7  + websocket-client==1.9.0
+#8 421.7  + websockets==16.1.1
+#8 421.7  + wrapt==2.3.0
+#8 421.7  + xxhash==4.0.1
+#8 421.7  + yarl==1.24.5
+#8 421.7  + zstandard==0.25.0
+#8 DONE 422.0s
+
+#9 [5/9] COPY src/ ./src/
+#9 DONE 0.8s
+
+#10 [6/9] COPY scripts/setup_delivery.py scripts/fresh_platform_sandbox.py scripts/verify_platform_mysql.py ./scripts/
+#10 DONE 0.1s
+
+#11 [7/9] COPY scripts/serve_frontend.py ./scripts/serve_frontend.py
+#11 DONE 0.1s
+
+#12 [8/9] COPY LICENSE ./LICENSE
+#12 DONE 0.1s
+
+#13 [9/9] RUN mkdir -p /app/output/delivery
+#13 DONE 0.4s
+
+#14 exporting to image
+#14 exporting layers
+#14 exporting layers 51.8s done
+#14 exporting manifest sha256:2748557da644a86b280d60ada6052db5fd11f853d4fd60a1ed4329f1162f6ee9 0.0s done
+#14 exporting config sha256:049d57ab985c4e471db93201660845549e7e6264d75a74c507aae76cc06ee0e0 0.0s done
+#14 exporting attestation manifest sha256:b2395089d59c9049aa766ceaae77f4cbe30d82f021f98d689ec44d5ca102a737 0.0s done
+#14 exporting manifest list sha256:547e369a6c139df55a685b1fa728d1bc2ea40e3980006c4f1d6239fefe2d74c3
+#14 exporting manifest list sha256:547e369a6c139df55a685b1fa728d1bc2ea40e3980006c4f1d6239fefe2d74c3 0.0s done
+#14 naming to docker.io/library/aftersales-platform:clean-verify done
+#14 unpacking to docker.io/library/aftersales-platform:clean-verify
+#14 unpacking to docker.io/library/aftersales-platform:clean-verify 22.4s done
+#14 DONE 74.4s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/ooh005je3uhlqj986y7c8yans

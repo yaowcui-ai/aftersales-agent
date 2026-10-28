@@ -1,0 +1,45 @@
+{
+  "checked_at_utc": "2026-10-28T12:27:05.419410+00:00",
+  "source_commit": "229e3efcee6e3fb7a83964d1d55c9ca08df558a0",
+  "build_command": "docker build -f docker/Dockerfile.platform -t aftersales-platform:clean-verify .",
+  "base": "python:3.12-slim (default, no preinstalled project packages)",
+  "build_exit_code": 0,
+  "image_id": "sha256:547e369a6c139df55a685b1fa728d1bc2ea40e3980006c4f1d6239fefe2d74c3",
+  "network_disabled_import": {
+    "python": "3.12.16 (main, Oct 28 2026, 02:01:20) [GCC 14.2.0]",
+    "packages": {
+      "fastapi": "0.141.1",
+      "langgraph": "1.2.11",
+      "mcp": "1.29.0",
+      "SQLAlchemy": "2.0.52",
+      "asyncmy": "0.2.15",
+      "langgraph-checkpoint-mysql": "3.0.0"
+    }
+  },
+  "uv_lock_sha256": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e",
+  "services": [
+    {
+      "Service": "api",
+      "State": "running",
+      "Health": "healthy"
+    },
+    {
+      "Service": "mcp",
+      "State": "running",
+      "Health": "healthy"
+    },
+    {
+      "Service": "mysql",
+      "State": "running",
+      "Health": "healthy"
+    },
+    {
+      "Service": "web",
+      "State": "running",
+      "Health": "healthy"
+    }
+  ],
+  "scope": "Clean image installation and imports; real browser/business evidence is recorded separately on the running local stack.",
+  "collector_note": "First collection imported successfully, then failed decoding Compose UTF-8 with Windows GBK; this collection explicitly uses UTF-8.",
+  "raw_build_log_sha256": "8db6d41a42b339ba9355f9981cfeaa69e70cfb1511a1146042f0a51ab5b75ebf"
+}

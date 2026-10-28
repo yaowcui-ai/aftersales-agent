@@ -1,0 +1,23 @@
+{
+  "collected_at_utc": "2026-10-28T12:23:25.956602+00:00",
+  "scope": "Delivery environment collected after experiments; not a retroactive pre-run machine snapshot",
+  "source_commit": "229e3efcee6e3fb7a83964d1d55c9ca08df558a0",
+  "python": "3.12.14 (main, Aug 14 2026, 15:40:22) [MSC v.1944 64 bit (AMD64)]",
+  "implementation": "CPython",
+  "system": "Windows",
+  "release": "11",
+  "machine": "AMD64",
+  "uv_lock_sha256": "3ee13227854b060e9c547ac58664564b9f8fb467a02dd4f1801cf11dfac1f85e",
+  "packages": {
+    "fastapi": "0.141.1",
+    "langgraph": "1.2.11",
+    "mcp": "1.29.0",
+    "SQLAlchemy": "2.0.52",
+    "asyncmy": "0.2.15",
+    "langgraph-checkpoint-mysql": "3.0.0",
+    "pytest": "9.1.1"
+  },
+  "node": "v24.14.1",
+  "npm": "11.11.0",
+  "docker": "29.8.2 / 29.8.2"
+}
