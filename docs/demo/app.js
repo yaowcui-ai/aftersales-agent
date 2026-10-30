@@ -39,8 +39,8 @@ function renderMetrics(data) {
   if (complete && Number.isInteger(passed) && total === 144 && passed >= 0 && passed <= total) {
     setText("evaluation-value", `${passed} / ${total}`);
     document.getElementById("evaluation-value").classList.remove("pending");
-    setText("evaluation-detail", `真实任务通过率 ${(100 * passed / total).toFixed(1)}% · 固定 48 案例 × 3 次`);
-    setText("evaluation-tag", "完整评测 · 已记录失败");
+    setText("evaluation-detail", `历史版本 ${(100 * passed / total).toFixed(1)}% · 不代表新版成功率`);
+    setText("evaluation-tag", "旧版历史基线 · 非新版指标");
   } else {
     setText("evaluation-value", complete ? "待核验指标" : "评测进行中");
     setText("evaluation-detail", data.detail || "新一轮真实评测进行中");
@@ -51,7 +51,7 @@ function renderMetrics(data) {
     setText("tests-detail", data.tests.detail);
   }
   if (data.browser) {
-    setMetric("browser-value", data.browser.steps ?? data.browser.passed, "步骤通过");
+    setMetric("browser-value", data.browser.passed, "项闭环验收");
     setText("browser-detail", data.browser.detail);
   }
   setText("metrics-status", data.updated_at ? `指标记录更新：${data.updated_at}。请结合下方原始验证记录核查。` : (data.detail || "公开指标已加载。"));

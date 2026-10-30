@@ -4,7 +4,7 @@
 
 围绕“客户自然语言诉求 → 查询事实/补问 → 创建申请工单 → 冻结参数审批 → 沙箱执行 → 数据库核验 → 结果与恢复”构建客户服务和审批员双工作台。所有退款、退货、补发均为模拟业务，没有接入真实支付或仓储。
 
-本升级在 `codex/fullstack-upgrade-20261028`，旧main、Streamlit入口及旧实验保留。[历史公开演示](https://yaowcui-ai.github.io/aftersales-agent/demo/) 展示的是此前Streamlit版本；本分支React实际截图和验证记录见下文。
+仓库默认 `main` 提供 **React 客户端与管理员工作台**，代码位于 [`frontend/`](frontend/)。[公开演示与验证](https://yaowcui-ai.github.io/aftersales-agent/demo/) 展示新版 React 的实际截图、验证记录及明确标注的旧版录屏；它是静态作品页，不连接在线业务后台。Streamlit 兼容入口及历史实验继续保留，旧版刷新历史的修复见 [修复记录](docs/delivery/HISTORY_REFRESH_FIX.md)。
 
 ## 产品功能
 
@@ -44,7 +44,9 @@ flowchart LR
 需要 Docker Desktop、可用网络，以及自己的兼容模型配置；本机开发建议Python3.12、uv0.12.5、Node24。
 
 ```powershell
-# 克隆本分支后，在项目根目录执行
+git clone https://github.com/yaowcui-ai/aftersales-agent.git
+cd aftersales-agent
+# 在项目根目录执行
 Copy-Item .env.example .env
 uv sync --frozen
 # 编辑.env：填写自己的模型名、兼容接口地址和密钥
@@ -102,7 +104,7 @@ docker compose --env-file .env.delivery -f compose.upgrade.yaml exec -T api pyth
 
 | 验证层 | 已保存结果 | 原始记录 |
 |---|---|---|
-| Python自动化 | 150项通过（含83项旧回归） | [输出](evaluation/upgrade/runtime/python-tests.txt) |
+| Python自动化 | 153项通过（含83项旧回归及3项历史恢复回归） | [输出](evaluation/history-refresh/20261030/python-upgrade-153.txt) |
 | React单测/生产构建 | 6项HTTP/恢复测试，TypeScript与Vite构建 | [前端](frontend/) |
 | 干净后端镜像 | 从默认Python基础镜像安装锁定依赖，断网导入API/MCP成功 | [构建核验](evaluation/upgrade/runtime/clean-image-verification.json) |
 | 真实MySQL及独立HTTP MCP | 7项事务、并发、归属/审批检查 | [MySQL/MCP](evaluation/upgrade/runtime/mysql-http-mcp.json) |

@@ -2,7 +2,7 @@ name: Verify application and evidence
 
 on:
   push:
-    branches: [main, 'codex/fullstack-upgrade-*', 'codex/fix-streamlit-history-*']
+    branches: [main, 'codex/fullstack-upgrade-*', 'codex/fix-streamlit-history-*', 'codex/publish-react-*']
   pull_request:
   workflow_dispatch:
 
@@ -49,3 +49,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Offline browser login layout (business tests require local sandbox credentials)
         run: npx playwright test --grep 'login is accessible'
+      - name: Verify public React screenshots and historical metric labels
+        env:
+          E2E_PUBLIC_DEMO: '1'
+          E2E_BASE_URL: http://127.0.0.1:18745
+        run: |
+          python3 -m http.server 18745 --bind 127.0.0.1 --directory ../docs > /tmp/aftersales-public-demo.log 2>&1 &
+          demo_pid=$!
+          trap 'kill "$demo_pid"' EXIT
+          npx playwright test e2e/public-demo.spec.ts

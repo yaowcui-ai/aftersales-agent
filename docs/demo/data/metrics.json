@@ -1,7 +1,7 @@
 {
   "status": "complete",
-  "detail": "冻结48案例各3次，完整真实模型回归复测；140通过、4失败均公开。",
-  "updated_at": "2026-10-21",
+  "detail": "默认main已更新React全栈版；旧模型基线与新工程验证分别报告。",
+  "updated_at": "2026-10-30",
   "evaluation": {
     "status": "complete",
     "passed": 140,
@@ -10,15 +10,16 @@
     "cases": 48,
     "repetitions": 3,
     "concurrency": 2,
-    "report_url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/latest.json"
+    "report_url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/latest.json",
+    "scope": "historical_streamlit_20261021_only"
   },
   "tests": {
-    "passed": 80,
-    "detail": "离线应用测试通过，使用替身模型与隔离数据库"
+    "passed": 153,
+    "detail": "Python自动化（含旧回归和历史恢复修复）；前端另有6项单测通过"
   },
   "browser": {
-    "steps": 7,
-    "detail": "真实浏览器：新对话、追问、历史切换和刷新恢复"
+    "passed": 1,
+    "detail": "React真实Agent闭环验收；另保留退款/退货表单与只读浏览器记录"
   },
   "evidence": [
     {
@@ -32,6 +33,18 @@
     {
       "label": "历史 129/144 原始结果",
       "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/results/historical-20261020.json"
+    },
+    {
+      "label": "新版评测与限制",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/docs/AGENT_EVALUATION_REPORT.md"
+    },
+    {
+      "label": "React源码",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/tree/main/frontend"
+    },
+    {
+      "label": "153项测试原始输出",
+      "url": "https://github.com/yaowcui-ai/aftersales-agent/blob/main/evaluation/history-refresh/20261030/python-upgrade-153.txt"
     }
   ]
 }
