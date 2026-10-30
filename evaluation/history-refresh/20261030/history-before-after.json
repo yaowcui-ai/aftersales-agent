@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "thread_id": "delivery-d955b199-b95c-48bb-9c15-9ade714e6e05",
+  "history_count": 100,
+  "messages_before": 2,
+  "messages_after": 2,
+  "model_calls_before": 1,
+  "model_calls_after": 1,
+  "real_model_calls_this_test": 0,
+  "total_tokens_this_test": 0,
+  "older_conversation_restored": true,
+  "cross_customer_blocked": true
+}

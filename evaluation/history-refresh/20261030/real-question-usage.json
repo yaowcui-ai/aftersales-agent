@@ -1,0 +1,9 @@
+{
+  "thread_id": "delivery-d955b199-b95c-48bb-9c15-9ade714e6e05",
+  "scope": "One read-only question sent during first browser attempt, reused by the passing read-only refresh verification",
+  "model_calls": 1,
+  "total_tokens": 1040,
+  "message_count": 2,
+  "status": "answered",
+  "business_proposal": null
+}

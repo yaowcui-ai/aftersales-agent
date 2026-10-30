@@ -180,6 +180,7 @@ def test_ui_customer_pending_approval_cannot_post_decision(monkeypatch):
     }
     monkeypatch.setattr(DeliveryClient, "get_task", lambda *args: task)
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
     monkeypatch.setattr(DeliveryClient, "decide", lambda *args, **kwargs: writes.append(kwargs))
     ui = Path(__file__).parents[2] / "src" / "aftersales_delivery" / "ui.py"
     # Allow local UI startup while Docker/Edge are running; assertions stay unchanged.
@@ -224,6 +225,7 @@ def test_ui_approver_decides_snapshot_version_once(monkeypatch):
         DeliveryClient, "list_approvals", lambda *args: [] if decisions else [action]
     )
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
 
     def decide(self, action_id, *, approved, version):
         decisions.append((action_id, approved, version))
@@ -269,6 +271,7 @@ def test_ui_customer_submission_timeout_does_not_repost(monkeypatch):
         },
     )
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
     ui = Path(__file__).parents[2] / "src" / "aftersales_delivery" / "ui.py"
     app = AppTest.from_file(str(ui))
     app.session_state["delivery_token"] = "customer-session"
@@ -308,6 +311,7 @@ def test_ui_displays_saved_final_answer_when_message_history_has_no_answer(monke
         },
     )
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
     ui = Path(__file__).parents[2] / "src" / "aftersales_delivery" / "ui.py"
     app = AppTest.from_file(str(ui))
     app.session_state["delivery_token"] = "customer-session"
@@ -340,6 +344,7 @@ def test_ui_completed_action_is_history_and_task_read_binds_owner(monkeypatch):
         ],
     )
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
 
     def get_task(self, thread_id, *, customer_id=None):
         reads.append((thread_id, customer_id))

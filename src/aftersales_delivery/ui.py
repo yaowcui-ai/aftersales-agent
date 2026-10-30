@@ -111,7 +111,7 @@ def show_task(task, *, include_messages=True):
 
 
 def remember_conversation(task):
-    """Keep only navigation labels in this login session, never a second message store."""
+    """Cache labels only; checkpoint history remains the durable message store."""
     title = next(
         (
             message["content"]
@@ -125,16 +125,47 @@ def remember_conversation(task):
     st.session_state.setdefault("delivery_conversations", {})[task["thread_id"]] = title.replace(
         "\n", " "
     )[:32]
+    st.query_params["conversation"] = task["thread_id"]
+
+
+def recover_conversations(client):
+    """Rebuild navigation after a fresh login/refresh; never repost a message."""
+    if st.session_state.get("delivery_history_loaded"):
+        return
+    try:
+        records = client.list_conversations()
+    except DeliveryClientError as error:
+        show_error(error)
+        return
+    st.session_state["delivery_conversations"] = {
+        item["thread_id"]: item.get("title", item["thread_id"])[:32]
+        for item in reversed(records)
+    }
+    st.session_state["delivery_history_loaded"] = True
+    target = (st.session_state.get("delivery_thread_id") or st.query_params.get("conversation")
+              or (records[0]["thread_id"] if records else None))
+    if not target:
+        return
+    try:
+        saved = client.get_task(target)
+    except DeliveryClientError as error:
+        show_error(error)
+    else:
+        st.session_state["delivery_thread_id"] = target
+        st.session_state["delivery_task"] = saved
+        remember_conversation(saved)
 
 
 def conversation_history(client):
     """Switch only after GET succeeds, so a bad/unauthorized ID cannot replace the chat."""
+    recover_conversations(client)
     with st.sidebar:
         st.divider()
         st.subheader("历史对话")
         if st.button("新建对话", key="new_task", width="stretch"):
             st.session_state.pop("delivery_thread_id", None)
             st.session_state.pop("delivery_task", None)
+            st.query_params.pop("conversation", None)
             st.rerun()
         active = st.session_state.get("delivery_thread_id")
         target = None
@@ -148,7 +179,10 @@ def conversation_history(client):
                 width="stretch",
             ):
                 target = thread_id
-        st.caption("以上为本次登录打开过的对话。更早的对话可用原任务编号加载。")
+        st.caption("显示当前账号最近100条对话。刷新或重新登录后仍可查看。")
+        if st.button("刷新历史列表", key="refresh_history", width="stretch"):
+            st.session_state.pop("delivery_history_loaded", None)
+            st.rerun()
         with st.expander("恢复已有任务"):
             with st.form("restore_task"):
                 saved_id = st.text_input("已保存的任务编号")
@@ -205,6 +239,7 @@ def customer_panel(client):
             if not thread_id:
                 thread_id = f"delivery-{uuid.uuid4()}"
                 st.session_state["delivery_thread_id"] = thread_id
+                st.query_params["conversation"] = thread_id
             try:
                 with transcript:
                     with st.chat_message("user"):
@@ -371,6 +406,7 @@ def main():
         )
         previous_url = st.session_state.get("delivery_api_url")
         if previous_url and previous_url != api_url:
+            st.query_params.pop("conversation", None)
             for key in list(st.session_state):
                 if key.startswith("delivery_") and key != "delivery_api_url":
                     del st.session_state[key]
@@ -411,6 +447,7 @@ def main():
             if user.get("customer_id"):
                 st.caption(f"客户编号：{user['customer_id']}")
             if st.button("退出登录"):
+                st.query_params.pop("conversation", None)
                 for key in list(st.session_state):
                     if key.startswith("delivery_"):
                         del st.session_state[key]

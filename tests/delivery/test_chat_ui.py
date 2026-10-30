@@ -51,6 +51,7 @@ def chat(monkeypatch):
     monkeypatch.setattr(DeliveryClient, "get_task", get_task)
     monkeypatch.setattr(DeliveryClient, "send_message", send_message)
     monkeypatch.setattr(DeliveryClient, "list_cases", lambda *args: [])
+    monkeypatch.setattr(DeliveryClient, "list_conversations", lambda *args: [])
     app = AppTest.from_file(str(UI), default_timeout=10)
     app.session_state["delivery_token"] = "customer-session"
     app.session_state["delivery_user"] = {

@@ -2,7 +2,7 @@ name: Verify application and evidence
 
 on:
   push:
-    branches: [main, 'codex/fullstack-upgrade-*']
+    branches: [main, 'codex/fullstack-upgrade-*', 'codex/fix-streamlit-history-*']
   pull_request:
   workflow_dispatch:
 

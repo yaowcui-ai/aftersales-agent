@@ -117,6 +117,9 @@ class DeliveryClient:
     def me(self) -> dict:
         return self._request("GET", "/me")
 
+    def list_conversations(self) -> list:
+        return self._request("GET", "/conversations")
+
     def send_message(self, thread_id: str, message: str) -> dict:
         return self._request("POST", f"/tasks/{self._id(thread_id)}/messages", {"message": message})
 

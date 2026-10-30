@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Annotated
 from weakref import WeakValueDictionary
 
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi import Path as ApiPath
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from langchain_core.messages import HumanMessage
@@ -392,6 +392,13 @@ def create_app(config=None, *, model=None, reply=None, local_tools=False):
     @app.get("/me")
     async def me(user=Depends(identity)):
         return user
+
+    @app.get("/conversations")
+    async def conversations(limit: int = Query(100, ge=1, le=100), user=Depends(identity), rt=Depends(runtime)):
+        if user["role"] != "customer":
+            raise public_error("CUSTOMER_REQUIRED", 403)
+        from aftersales_delivery.conversation_history import list_conversations
+        return await list_conversations(rt, user["customer_id"], limit)
 
     @app.post("/tasks/{thread_id}/messages")
     async def message(
